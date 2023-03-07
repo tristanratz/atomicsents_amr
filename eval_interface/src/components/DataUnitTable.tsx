@@ -14,6 +14,7 @@ interface Props {
     ex: any
     ind: any
     isDetailOpen: boolean
+    isFiltered: boolean
     acc: any[]
     scus: any[]
     stus: any[]
@@ -23,7 +24,7 @@ interface Props {
 
 const DataUnitTable = (props: Props) => {
     const [isOpen, setIsOpen] = useState(true);
-    const {ex, ind, isDetailOpen, scus, stus, smus, acc, metric} = props;
+    const {ex, ind, isDetailOpen, scus, stus, smus, acc, metric, isFiltered} = props;
 
     let accSMUs;
     let accSTUs;
@@ -97,6 +98,7 @@ const DataUnitTable = (props: Props) => {
                     stu_pos={stu_pos}
                     smu_pos={smu_pos}
                     isDetailOpen={isDetailOpen}
+                    isFiltered={isFiltered}
                 />
             </Collapse>
         </div>

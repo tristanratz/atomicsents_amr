@@ -10,6 +10,7 @@ import Settings from "./components/Settings";
 
 const App = () => {
     const [isDetailOpen, setIsDetailOpen] = useState(true);
+    const [isFiltered, setIsFiltered] = useState(true);
     const [chosenDataset, setChosenDataset] = useState(Dataset.Realsumm.toString());
     const [chosenMetric, setChosenMetric] = useState(Metric.Rouge.toString());
     const [chosenSubgraph, setChosenSubgraph] = useState(Subgraph.SG4.toString());
@@ -22,6 +23,8 @@ const App = () => {
             <div>
                 <Settings isDetailOpen={isDetailOpen}
                           setIsDetailOpen={setIsDetailOpen}
+                          isFiltered={isFiltered}
+                          setIsFiltered={setIsFiltered}
                           chosenDataset={chosenDataset}
                           setChosenDataset={setChosenDataset}
                           chosenMetric={chosenMetric}
@@ -30,7 +33,7 @@ const App = () => {
                           setChosenSubgraph={setChosenSubgraph}
                 />
                 <DatasetTable dataset={chosenDataset} isDetailOpen={isDetailOpen} metric={chosenMetric}
-                              subgraph={chosenSubgraph}/>
+                              subgraph={chosenSubgraph} isFiltered={isFiltered}/>
             </div>
             <ScrollToTop smooth className="scroll-to-top" component={<ArrowUpwardIcon/>}/>
         </div>

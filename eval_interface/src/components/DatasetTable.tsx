@@ -7,10 +7,11 @@ interface Props {
     isDetailOpen: boolean
     metric: string
     subgraph: string
+    isFiltered: boolean
 }
 
 const DatasetTable = (props: Props) => {
-    const {dataset, isDetailOpen, metric, subgraph} = props;
+    const {dataset, isDetailOpen, metric, subgraph, isFiltered} = props;
 
     const {scus, stus, smus, acc} = loadData(subgraph, dataset);
 
@@ -18,7 +19,7 @@ const DatasetTable = (props: Props) => {
         <div className='table-wrapper'>
             {scus.map((ex, ind) => (
                 <DataUnitTable key={ex.instance_id} ex={ex} ind={ind} isDetailOpen={isDetailOpen} scus={scus}
-                               stus={stus} smus={smus} acc={acc} metric={metric}/>
+                               stus={stus} smus={smus} acc={acc} metric={metric} isFiltered={isFiltered}/>
             ))}
         </div>
     );

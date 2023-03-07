@@ -6,6 +6,8 @@ import {Dataset, Metric, Subgraph} from "./Enums";
 export interface SettingsProps {
     isDetailOpen: boolean
     setIsDetailOpen: Function
+    isFiltered: boolean
+    setIsFiltered: Function
     chosenDataset: string
     setChosenDataset: Function
     chosenMetric: string
@@ -19,6 +21,8 @@ const Settings = (props: SettingsProps) => {
     const {
         isDetailOpen,
         setIsDetailOpen,
+        isFiltered,
+        setIsFiltered,
         chosenDataset,
         setChosenDataset,
         chosenMetric,
@@ -86,7 +90,6 @@ const Settings = (props: SettingsProps) => {
 
                 </Select>
             </FormControl>
-
             <Button variant="contained"
                     aria-label="collapse"
                     onClick={() => setIsDetailOpen(!isDetailOpen)}
@@ -94,9 +97,21 @@ const Settings = (props: SettingsProps) => {
                     style={{
                         borderRadius: 10,
                         backgroundColor: "#488ab6",
+                        margin: "0.5rem 2rem 0.5rem 0rem",
                     }}
             >
                 {isDetailOpen ? <h4>Hide details</h4> : <h4>Show details</h4>}
+            </Button>
+            <Button variant="contained"
+                    aria-label="collapse"
+                    onClick={() => setIsFiltered(!isFiltered)}
+                    className='Button'
+                    style={{
+                        borderRadius: 10,
+                        backgroundColor: "#488ab6",
+                    }}
+            >
+                {isFiltered ? <h4>Show raw data</h4> : <h4>Show filtered data</h4>}
             </Button>
         </div>
     );
