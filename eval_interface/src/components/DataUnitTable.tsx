@@ -56,25 +56,17 @@ const DataUnitTable = (props: Props) => {
             trees.push(str.slice(str.indexOf('\n') + 1));
         });
         return (
-            isDetailOpen ?
                 <table>
                     <tr>
                         {sentences.map((sent) => {
                             return <td key={sent}>{sent}</td>
                         })}
                     </tr>
-                    <tr className='tree-table'>{
+                    {isDetailOpen&&(<tr className='tree-table'>{
                         trees.map((tree) => {
                             return <td key={tree}>{tree}</td>
                         })}
-                    </tr>
-                </table> :
-                <table>
-                    <tr>
-                        {sentences.map((sent) => {
-                            return <td key={sent}>{sent}</td>
-                        })}
-                    </tr>
+                    </tr>)}
                 </table>
         )
     };

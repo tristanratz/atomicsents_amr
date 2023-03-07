@@ -5,13 +5,14 @@ import './App.css';
 
 
 import DatasetTable from "./components/DatasetTable";
-import {Dataset, Metric} from "./components/Enums";
+import {Dataset, Metric, Subgraph} from "./components/Enums";
 import Settings from "./components/Settings";
 
 const App = () => {
     const [isDetailOpen, setIsDetailOpen] = useState(true);
-    const [choosenDataset, setChoosenDataset] = useState(Dataset.Realsumm.toString());
-    const [choosenMetric, setChoosenMetric] = useState(Metric.Rouge.toString());
+    const [chosenDataset, setChosenDataset] = useState(Dataset.Realsumm.toString());
+    const [chosenMetric, setChosenMetric] = useState(Metric.Rouge.toString());
+    const [chosenSubgraph, setChosenSubgraph] = useState(Subgraph.SG4.toString());
 
     return (
         <div className="App">
@@ -19,16 +20,19 @@ const App = () => {
                 <h1>Evaluation interface</h1>
             </div>
             <div>
-            <Settings isDetailOpen={isDetailOpen}
-                      setIsDetailOpen={setIsDetailOpen}
-                      choosenDataset={choosenDataset}
-                      setChoosenDataset={setChoosenDataset}
-                      choosenMetric={choosenMetric}
-                      setChoosenMetric={setChoosenMetric}
-            />
-            <DatasetTable dataset={choosenDataset} isDetailOpen={isDetailOpen} metric={choosenMetric}/>
+                <Settings isDetailOpen={isDetailOpen}
+                          setIsDetailOpen={setIsDetailOpen}
+                          chosenDataset={chosenDataset}
+                          setChosenDataset={setChosenDataset}
+                          chosenMetric={chosenMetric}
+                          setChosenMetric={setChosenMetric}
+                          chosenSubgraph={chosenSubgraph}
+                          setChosenSubgraph={setChosenSubgraph}
+                />
+                <DatasetTable dataset={chosenDataset} isDetailOpen={isDetailOpen} metric={chosenMetric}
+                              subgraph={chosenSubgraph}/>
             </div>
-            <ScrollToTop smooth className="scroll-to-top" component={<ArrowUpwardIcon />}/>
+            <ScrollToTop smooth className="scroll-to-top" component={<ArrowUpwardIcon/>}/>
         </div>
     );
 };
