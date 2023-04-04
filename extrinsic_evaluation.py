@@ -38,18 +38,18 @@ def calc_corr_summary_and_system(results, golden, cross_validation=False):
     else:
         system_pearson, system_spearman = system_level_correlation(golden, results)
 
-    summary_pearson, summary_spearman = summary_level_correlation(golden, results)
+    summary_pearson, summary_spearman, pearson, spearman = summary_level_correlation(golden, results)
 
-    # print(f"Pearson mean: {np.mean(pearson)}")
-    # print(f"Pearson median: {np.median(pearson)}")
-    # print(f"Pearson outliers: {[index for index, item in enumerate(pearson) if item < -0.3]}")
-    # #plt.boxplot(pearson)
-    # #plt.show()
-    # print(f"Spearman mean: {np.mean(spearman)}")
-    # print(f"Spearman median: {np.median(spearman)}")
-    # print(f"Spearman outliers: {[index for index, item in enumerate(spearman) if item < -0.3]}")
-    # #plt.boxplot(spearman)
-    # #plt.show()
+    print(f"Pearson mean: {np.mean(pearson)}")
+    print(f"Pearson median: {np.median(pearson)}")
+    print(f"Pearson outliers: {[index for index, item in enumerate(pearson) if item < -0.3]}")
+    #plt.boxplot(pearson)
+    #plt.show()
+    print(f"Spearman mean: {np.mean(spearman)}")
+    print(f"Spearman median: {np.median(spearman)}")
+    print(f"Spearman outliers: {[index for index, item in enumerate(spearman) if item < -0.3]}")
+    #plt.boxplot(spearman)
+    #plt.show()
 
     return [system_pearson, system_spearman, summary_pearson, summary_spearman]
 
@@ -68,7 +68,7 @@ def nli_evaluation_from_paper(summarys, smus):
             if i == 0:
                 name_of_system.append(value[0])
             all_summarys[j - 1].append(value[1])
-        all_sxus.append(smus[i]['sgus'])
+        all_sxus.append(smus[i]['smus'])
     results = []
     for i in range(len(all_summarys)):
         print(f"System summary: {name_of_system[i]} ( {i + 1} / {len(all_summarys)} )")
@@ -112,9 +112,9 @@ def corr_evaluate_realsumm():
     print("REALSumm start!")
 
     result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/realsumm/realsumm-system-summary.json'),
-                                    open_json_file('eval_interface/src/data/realsumm/realsumm-sgus-davinci.json'))
+                                    open_json_file('eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v9.json'))
 
-    save_dict_to_json(result_Dict, 'eval_interface/src/data/realsumm/realsumm-nli-score-sgus-davinci.json')
+    save_dict_to_json(result_Dict, 'eval_interface/src/data/realsumm/realsumm-nli-score-smu.json')
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
                                             'eval_interface/src/data/realsumm/realsumm-golden-labels.json'))
@@ -128,9 +128,9 @@ def corr_evaluate_pyrxsum():
     print("PyrXSum start!")
 
     result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-system-summary.json'),
-                                    open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-sgus-davinci.json'))
+                                    open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v9.json'))
 
-    save_dict_to_json(result_Dict, 'eval_interface/src/data/pyrxsum/pyrxsum-nli-score-sgus-davinci.json')
+    save_dict_to_json(result_Dict, 'eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu.json')
 
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
@@ -150,11 +150,11 @@ def corr_evaluation_datase():
     list_of_results.append(corr_evaluate_pyrxsum())
     list_of_results.append(corr_evaluate_realsumm())
 
-    write_to_json(list_of_results, 'data/extrinsic_evaluation-sgu-davinci.json')
+    write_to_json(list_of_results, 'data/extrinsic_evaluation-smu-sg4-plus-v9.json')
 
 
 def plot_results():
-    return calc_corr_summary_and_system(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-nli-score-sgus-davinci.json'),
+    return calc_corr_summary_and_system(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu.json'),
                                         open_json_file(
                                             'eval_interface/src/data/pyrxsum/pyrxsum-golden-labels.json'))
 

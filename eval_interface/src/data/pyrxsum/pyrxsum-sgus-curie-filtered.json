@@ -1,0 +1,911 @@
+[
+  {
+    "instance_id": "pyrxsum-0",
+    "summary": "Netherlands midfielder Wesley Sneijder has joined French Ligue 1 side Nice on a free transfer.",
+    "sgus": [
+      "Wesley Sneijder has joined Nice on a free transfer",
+      "Wesley Sneijder joined Nice on a free transfer",
+      "Wesley Sneijder is a Dutch midfield play"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-1",
+    "summary": "A State Department official \"pressured\" the FBI to change the classification of a Hillary Clinton email in a \"quid pro quo\", according to FBI documents.",
+    "sgus": [
+      "State official pressed FBI to change classification",
+      "State official pressured deal",
+      "State official pressured change",
+      "FBI documents say State official pressured change"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-2",
+    "summary": "American Jason Dufner will take a five-shot lead into the third round of the Memorial Tournament after carding an eagle on the 18th hole on Friday.",
+    "sgus": [
+      "Jason Dufner will take a five-shot lead into the third round",
+      "Dufner carded an eagle on 18th hole",
+      "Jason Dufner is a American",
+      "Dufner is Jason/Jason Dufner"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-3",
+    "summary": "A British man has been been questioned in Peru after posing naked at the Machu Picchu ruins, local police have said.",
+    "sgus": [
+      "The man was questioned in Peru",
+      "Police said the man posed nude",
+      "The man posed at the Machu Picchu ruins",
+      "The investigation involved the local police"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-4",
+    "summary": "Great Britain skeleton racer David Swift has retired from the sport.",
+    "sgus": [
+      "David Swift has retired from skeleton racing",
+      "Swift was Britain's skeleton racer"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-5",
+    "summary": "Michael Dunlop set the fastest times for the Ulster Grand Prix Superbike and Superstock classes in Thursday's delayed practice sessions at Dundrod.",
+    "sgus": [
+      "Dunlop set the fastest times for the Ulster Grand Prix."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-6",
+    "summary": "Argentine club Newell's Old Boys have re-signed Sunderland striker Ignacio Scocco on a five-year contract.",
+    "sgus": [
+      "Newell's Old Boys is an Argentine club",
+      "Ignacio Scocco is a Sunderland striker",
+      "Scocco signed a five-year contract"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-7",
+    "summary": "West Ham say they are \"disappointed\" with a ruling that the terms of their rental of the Olympic Stadium from next season should be made public.",
+    "sgus": [
+      "Rental should be made public",
+      "West Ham say they are \"disappointed\"."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-8",
+    "summary": "Ex-army chief Abdul Fattah al-Sisi has vowed to to tackle \"terrorism\" and bring security, after being sworn in as Egypt's new president.",
+    "sgus": [
+      "Ex-army chief Abdul Fattah al-Sisi has vowed to to tackle \"terrorism\"",
+      "President Sisi is sworn in as Egypt's president"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-9",
+    "summary": "Twenty-times champion jump jockey Sir Anthony McCoy has described having a statue put up in his honour at Cheltenham as 'flattering.'",
+    "sgus": [
+      "Sir Anthony McCoy is champion jump jockey",
+      "McCoy has described having a statue put up in his honour",
+      "McCoy was pleased about the honour"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-10",
+    "summary": "A cafe owner has defended a sign urging people to eat cake to avoid being kidnapped in the town where April Jones was abducted and murdered in 2012.",
+    "sgus": [
+      "Murdered girl was abducted",
+      "Cafe owner defends sign",
+      "Cafe owner defends sign to avoid being kidnapped",
+      "cafe owner defended sign ",
+      "Cafe owner defends sign to avoid being kidnapped"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-11",
+    "summary": "Three people have been killed and at least 62 others wounded in two explosions on passenger buses in the Kenyan capital Nairobi, officials say.",
+    "sgus": [
+      "At least 62 others wounded",
+      "Two explosions on passenger buses in the Kenyan capital Nairobi",
+      "Kenya's capital is Nairobi"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-12",
+    "summary": "Thirty homes had to be evacuated after a gas pipe was damaged in a fire that was started deliberately.",
+    "sgus": [
+      "Pipe damaged in fire",
+      "Gas pipe damaged"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-13",
+    "summary": "Friends of Keith Harris have joined his family at his funeral in Blackpool.",
+    "sgus": [
+      "Harris' family held a funeral service for him",
+      "Friends of Keith Harris joined his family at the funeral.",
+      "The funeral was in Blackpool"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-14",
+    "summary": "Former Labour MP Bob Marshall-Andrews has defected to the Lib Dems after describing Jeremy Corbyn's party as a \"political basket case\".",
+    "sgus": [
+      "Bob Marshall-Andrews is a former UK MP",
+      "Bob Marshall-Andrews describes Labour party as a \"political basket case",
+      "Bob Marshall-Andrews defects to the Lib Dems"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-15",
+    "summary": "Castleford Tigers beat local rivals Wakefield Trinity to clinch the League Leaders' Shield.",
+    "sgus": [
+      "Castleford Tigers won the League Leaders' Shield",
+      "Castleford Tigers won the League Leaders' Shield",
+      "Castleorf Tigers beat local rivals Wakefield Trinity to clinch the League Leaders' Shield.",
+      "Castleford Tigers beat local rivals Wakefield Trinity to clinch the League Leaders' Shield",
+      "Castleford beat Wakefield Trinity to clinch the League Leaders' Shield",
+      "Castleford Tigers beat Wakefield Trinity to clinch the League Leaders' Shield.",
+      "Castleford Tigers beat local rivals Wakefield Trinity to clinch the League Leaders' Shield",
+      "Castleford win the League Leaders Shield"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-16",
+    "summary": "At least 23 people have been killed in the north-eastern Nigerian town of Monguno after a Boko Haram bomb confiscated by vigilantes exploded, an MP and army source have told the BBC.",
+    "sgus": [
+      "A bomb exploded in Monguno",
+      "At least 23 people have been killed",
+      "An MP and army source have told the BBC",
+      "an MP has told of violence in Monguno",
+      "The BBC received reports of violence in Monguno"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-17",
+    "summary": "The sports centre at Ravenscraig is a homage, a \"symphony in steel\", say the architects.",
+    "sgus": [
+      "Ravenscraig sports centre is a \"symphony in steel\"."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-18",
+    "summary": "The winner of The Jump 2017 is Spencer Matthews.",
+    "sgus": [
+      "Spencer Matthews was the winner",
+      "Spencer Matthews was the winner of The Jump 2017"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-19",
+    "summary": "Fifa presidential candidate Gianni Infantino says he would press for the World Cup to be held in a whole region rather than one or two countries.",
+    "sgus": [
+      "Fifa presidential candidate Gianni Infantino says he would press for the World Cup to be held in a whole region"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-20",
+    "summary": "Finance Secretary John Swinney has warned of \"tough choices\" facing Scotland as he prepares to set out his budget.",
+    "sgus": [
+      "John Swinney is Finance Secretary",
+      "Swinney warned of tough choices",
+      "Swinney to set out budget"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-21",
+    "summary": "The judge leading the inquiry into the Grenfell Tower fire has written to the prime minister with recommendations for its terms of reference.",
+    "sgus": []
+  },
+  {
+    "instance_id": "pyrxsum-22",
+    "summary": "Police in a small Alaska town mistakenly told a couple their son had been killed in a car crash, leading to an extraordinary reunion hours later.",
+    "sgus": [
+      "Police told couple their son had been killed",
+      "Emotionlllary reuun",
+      "Story leads to extraordinary reunion"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-23",
+    "summary": "South Africa's prosecutors have sought permission to appeal against athlete Oscar Pistorius' \"shockingly light\" sentence, court papers show.",
+    "sgus": [
+      "Prosecutors seek to appeal against Pistorius 'light' sentence",
+      "Sentencing was shockingly light",
+      "Oscar Pistorius was convicted",
+      "Sentencing heard in South Africa"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-24",
+    "summary": "The UK's first maternity clinic for women who have been victims of rape and sexual assault has opened.",
+    "sgus": [
+      "UK's first maternity clinic for women who have been victims of rape and sexual assault has opened"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-25",
+    "summary": "The number of children referred to the NHS with gender identity issues has increased significantly in recent years, according to figures obtained by the BBC.",
+    "sgus": [
+      "Referral numbers have increased in recent years"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-26",
+    "summary": "The mayor of an east London borough has been accused of \"corrupt and illegal practices\", at a special court hearing.",
+    "sgus": [
+      "Mayor of an east London borough was accused",
+      "Mayor is charged with corrupt and illegal practices",
+      "Mayor's actions are questioned"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-27",
+    "summary": "A 21-year-old man has appeared in court in County Clare charged over the fatal stabbing of Karl Haugh in Kilkee at the weekend.",
+    "sgus": [
+      "21-year-old man was charged",
+      "29-year-old Karl Haugh was stabbed to death",
+      "Karl Haugh was stabbed in Kilkee",
+      "The stabbing happened at the weekend",
+      "A young man appeared before the court",
+      "The young man is charged with murdering another young person."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-28",
+    "summary": "Post Office workers will stage five days of strikes from Monday in a continuing dispute over jobs, pensions and branch closures, their union says.",
+    "sgus": [
+      "Workers will strike for five days",
+      "Union disputes closures of post offices"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-29",
+    "summary": "Wales' youth workers will be regulated by the Education Workforce Council for the first time from 1 April.",
+    "sgus": [
+      "Education Workforce Council regulates the YSC",
+      "Youth workers were regulated by the Education Workforce Council"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-30",
+    "summary": "Liberal Democrat leader Tim Farron says he does not believe gay sex is a sin, following questions about his views on the subject.",
+    "sgus": [
+      "Questions about Tim Farron's views on gay sex",
+      "Liberal Democrat leader Tim Farron says he does not believe gay sex is a sin",
+      "Lib Dem leader says he does not believe gay sex is a sin"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-31",
+    "summary": "Paint has been thrown over an Orange hall in north Belfast.",
+    "sgus": [
+      "Paint was thrown over an Orange hall",
+      "The Orange hall is in north Belfast"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-32",
+    "summary": "Liverpool boss Jurgen Klopp defended under-fire goalkeeper Simon Mignolet after his latest uncertain display in the draw with Arsenal at Anfield.",
+    "sgus": [
+      "Mignolet has uncertain display",
+      "Liverpool defended under-fire goalkeeper Mignolet",
+      "Liverpool coach Jurgen Klopp defends Mignolet"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-33",
+    "summary": "Thousands of people have been leaving besieged, rebel-held eastern districts of the Syrian city of Aleppo following the resumption of evacuations agreed as part of a ceasefire deal last week.",
+    "sgus": [
+      "Thousands of people have been leaving eastern neighborhoods of Aleppo",
+      "Thousands of people have been leaving Aleppo following the truce",
+      "Evacuations resumed under ceasefire deal",
+      "Evacuations were part of a ceasefire deal"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-34",
+    "summary": "Thousands of people have marched in opposition to plans to downgrade Stafford Hospital's services.",
+    "sgus": [
+      "Plans to downgrade Stafford Hospital's services",
+      "People marched in opposition to plans to downgrade Stafford Hospital's services"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-35",
+    "summary": "Filled with goodwill, unfathomable optimism and a slightly heavy heart, you embark on a health kick.",
+    "sgus": [
+      "You embark on a health kick",
+      "Filled with goodwill",
+      "optimism",
+      "slightly heavy heart",
+      "You embark on a health kick"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-36",
+    "summary": "Russia and Qatar may have had to pay bribes to secure their World Cups, Sepp Blatter's former special advisor has suggested.",
+    "sgus": [
+      "World Cup bribes possible",
+      "Sepp Blatter's former special advisor suggests bribery",
+      "Former assistant backs allegations ",
+      "Blatter is head of FIFA"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-37",
+    "summary": "The High Court has begun hearing the legal challenge of a terminally ill UK man who wants the right to die.",
+    "sgus": [
+      "The case involves a terminally ill British man.",
+      "The case was brought by  a terminally ill British man",
+      "The High Court has begun hearing the case."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-38",
+    "summary": "An online appeal set up to help the family of a five-year-old girl who died when her head became stuck in a lift in Dorset has raised more than \u00a312,000.",
+    "sgus": [
+      "The girl's head got stuck in a lift",
+      "An online appeal was set up to help the family",
+      "An online appeal raised money for the family"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-39",
+    "summary": "Game of Thrones star \"The Mountain\" has been beaten to Europe's Strongest Man title by a man from Swindon.",
+    "sgus": [
+      "The Mountain was a Star on GOT"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-40",
+    "summary": "Labour leadership contender Andy Burnham has told supporters he has an \"outside but realistic chance\" of winning the contest.",
+    "sgus": [
+      "Leadership contest",
+      "Leadership hopeful Andy Burnham",
+      "Burnham tells supporters he has chance to win the contest",
+      "Leadership contender Andy Burnham has told supporters he has an \"outside but realistic chance\" of winning the contest",
+      "Burnham's chances realistic"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-41",
+    "summary": "Belfast Giants have closed the gap on Elite League leaders Cardiff Devils to six points with this comfortable win over the Capitals at the SSE Arena.",
+    "sgus": [
+      "Capitals lost to Belfast Giants",
+      "Elite League leaders Cardiff Devils have six points advantage",
+      "Belfast Giants won",
+      "Cardiff Devils are the leaders.",
+      "Cardiff Devils play in the EIHL",
+      "This game was played at the SSE Arena"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-42",
+    "summary": "Hayley Turner, Britain's most successful female jockey, believes her career has helped inspire other women to progress in the sport.",
+    "sgus": [
+      "Britain's most successful female jockey is Hayley Turner",
+      "Hayley Turner believes her career helped inspire other women to progress in the sport",
+      "Turner's career has helped inspire other women to progress in the sport"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-43",
+    "summary": "An elderly woman has died in a house fire in Enniskillen.",
+    "sgus": [
+      "An elderly woman has died in a house fire",
+      "The fire occurred in Enniskillen."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-44",
+    "summary": "Championship side Fulham have signed striker Gohi Cyriac on loan until the end of the season from Belgian Pro League side KV Oostende.",
+    "sgus": [
+      "Cyriac is signed to Fulham",
+      "Cyriac is from Belgium",
+      "Gohi Cyriac is signed to Fulham until end of season",
+      "Fulham are Championship side"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-45",
+    "summary": "Wales started their 2018 World Cup qualifying campaign in confident fashion as they convincingly beat Moldova.",
+    "sgus": [
+      "Wales beat Moldova",
+      "Wales confident ",
+      "Wales convincingly beat Moldova",
+      "Wales convincingly beat Moldova in confident fashion",
+      "2018 World Cup qualifying campaign ",
+      "Moldova beaten",
+      "Moldova beaten in confident fashion"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-46",
+    "summary": "The BBC's director general has accused the Iranian authorities of intimidating those working for its Persian service.",
+    "sgus": [
+      "The staff of the BBC's Persian service have been intimidated",
+      "The director general of the BBC accused the Iranian authorities of intimidation"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-47",
+    "summary": "A mother of six with an IQ of 70 should be sterilised for her own safety, the Court of Protection has ruled.",
+    "sgus": [
+      "An IQ of 70 should be Sterilised",
+      "A mother of six  with an IQ of 70 should be sterilised for her own safety",
+      "The Court of Protection ruled on the case"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-48",
+    "summary": "China's biggest privately-held conglomerate Fosun has joined a bidding war for the Portuguese hospital operator Espirito Santo Saude (ESS).",
+    "sgus": [
+      "Essar is a Portuguese hospital operator",
+      "Fosun is the largest Chinese privately-held conglomerate",
+      "Fosun has joined a bidding war for the Portuguese hospital operator",
+      "The hospital operator is ESSP ",
+      "Fosun is in the healthcare sector"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-49",
+    "summary": "Bosses have been urged not to indulge in invasive surveillance by reading their employees' private messages.",
+    "sgus": [
+      "Bosses have been urged not to indulge in invasive surveillance",
+      "Bosses have been urged not to indulge in invasive surveillance",
+      "Bosses have been urged not to indulge in invasive surveillance",
+      "Bosses have been urged not to indulge in invasive surveillance",
+      "Bosses have been urged not to indulge in invasive surveillance ",
+      "Bosses have been urged not to indulge in invasive surveillance",
+      "Bosses have been urged not to indulge in invasive surveillance",
+      "Bosses have been urged not to indulge in invasive surveillance",
+      "Bosses have been urged not to indulge in invasive surveillance",
+      "Bosses have been urged not to indulge in invasive surveillance"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-50",
+    "summary": "Supermarket chain Morrisons has increased the cost of a jar of Marmite by 12.5%, say retail industry experts.",
+    "sgus": [
+      "Retail industry experts say the cost of a jar of Marmite was increased",
+      "This is a chain supermarket.",
+      "The name of the supermarket is Morrisons."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-51",
+    "summary": "More should be done to help deaf people into work in Wales, a charity has said.",
+    "sgus": [
+      "More should be done to help deaf people into work",
+      "Hearing disabled people in Wales need help",
+      "Deaf people need help into work",
+      "Hearing disabled people in Wales need help",
+      "Support for the inclusion of deaf people in work "
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-52",
+    "summary": "Five teenagers have been sentenced after admitting their part in a \"riot\" which saw part of Newport city centre \"under siege\".",
+    "sgus": [
+      "Teenagers were arrested for rioting",
+      "Teenagers admitted their part in riot",
+      "Newport city centre \"under siege\""
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-53",
+    "summary": "Fetch, sit and roll over - all the kinds of normal things that you would say to your dog.",
+    "sgus": [
+      "Fetch is a normal thing to do.",
+      "Sit is a normal thing to do.",
+      "Roll over is a normal thing to do."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-54",
+    "summary": "A grand jury has decided not to indict anyone in the case of Sandra Bland, who died in a Texas jail earlier this year.",
+    "sgus": [
+      "The case of Sandra Bland",
+      "...who died in a Texas jail",
+      "A grand jury has decided not to indict anyone",
+      "A grand jury decided not to indict anyone"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-55",
+    "summary": "A man was limp \"like a teddy bear\" after he was restrained by bouncers on the ground outside an Aberdeen bar, a murder trial has heard.",
+    "sgus": [
+      "A man was limp \"like a teddy bear\"",
+      "A man was limp \"like a teddy bear\" after he was restrained by bouncers",
+      "A man was restrained by bouncers on the ground outside an Aberdeen bar",
+      "There was a man on the ground ",
+      "A man was limp \"like a teddy bear\" outside an Aberdeen bar",
+      "There was a man on the ground in Aberdeen",
+      "A man was limp \"like a teddy bear\" outside an outside Aberdeen bar"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-56",
+    "summary": "A bagpipe-playing busker has been convicted of duping people in Liverpool into thinking he was collecting for a Hillsborough charity.",
+    "sgus": [
+      "Bagpipe-playing buswayer conned people into thinking he was collecting for a Hillsborough charity."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-57",
+    "summary": "New Morocco coach Herve Renard begins his quest for a record-equalling third Africa Cup of Nations as qualifying for the 2017 tournament resumes this week.",
+    "sgus": [
+      "Morocco coach Herve Renard begins his quest for a third Africa Cup of Nations",
+      "Team wants Africa Cup of Nations title once again",
+      "Qualifying for the 2017 tournament resumes",
+      "Morocco is in qualifying for the 2017 Africa Cup of Nations"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-58",
+    "summary": "Soul singer Ray BLK has topped the BBC's Sound Of 2017 list, which aims to predict the most exciting new music for the year ahead.",
+    "sgus": [
+      "topped the BBC's Sound Of 2017 list",
+      "Sound Of 2017 list predicted upcoming music",
+      "Sound Of 2017 list aims to predict [the] most exciting new music for the year ahead",
+      "Ray BLK is a singer"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-59",
+    "summary": "Hundreds of protesters in Kabul have accused Iran of stopping fuel tankers from crossing the border into Afghanistan.",
+    "sgus": [
+      "protesters in Kabul accused Iran of blocking fuel supplies",
+      "protesters in Kabul charged Iran with blockading fuel supplies"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-60",
+    "summary": "Some police forces are putting the public at risk by rationing their response as they struggle with cutbacks, the police standards watchdog has warned.",
+    "sgus": [
+      "Some police forces are rationing their response",
+      "Some police forces are putting the public at risk",
+      "Police forces rationing/fighting cutbacks"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-61",
+    "summary": "Pace bowler Jake Ball has made a \"lively\" return following a winter playing for England Lions, says Nottinghamshire captain Chris Read.",
+    "sgus": [
+      "Jake Ball is a pace bowler",
+      "Jake Ball has made a \"lively\" return",
+      "Nottinghamshire captain Chris Read is captain of Nottinghamshire",
+      "Chris Read is captain of Nottinghamshire team",
+      "Ball was playing for England Lions in winter",
+      "Ball returned to Nottinghamshire after the winter playing for England Lions",
+      "Ball is a pace bowler",
+      "Ball returned to Nottinghamshire after a winter playing for England Lions"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-62",
+    "summary": "A serial robber who threatened an 18-year-old shop worker with a knife was caught after his streak of grey hair was recognised in CCTV footage.",
+    "sgus": [
+      "Robber threatened shop worker with knife",
+      "Grey hair recognised in CCTV footage",
+      "Strand of grey hair recognised in CCTV footage",
+      "Robber caught"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-63",
+    "summary": "A British man has survived a fall from the 15th floor of a building in New Zealand, local media report.",
+    "sgus": [
+      "British man survived a fall"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-64",
+    "summary": "The Royal Navy has released an image of planned improvements to a jetty at Portsmouth Naval Base.",
+    "sgus": [
+      "The Royal Navy has released an image of planned improvements to a jetty at Portsmouth Naval Base"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-65",
+    "summary": "China has said Japan is endangering peace in the region after it passed controversial laws expanding the role of its military abroad.",
+    "sgus": [
+      "Japan passed controversial laws expanding the role of its military abroad",
+      "China has said Japan is endangering peace in the region"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-66",
+    "summary": "Celtic restored their 10-point lead at the top of the table after overcoming Inverness Caledonian Thistle.",
+    "sgus": [
+      "Celtic became the league leaders",
+      "Inverness Caledonian Thistle were visited by Celtic.",
+      "Celtic overcame Inverness Caledonian Thistle.",
+      "Celtic regained the 10-point lead."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-67",
+    "summary": "England captain Sean O'Loughlin says he would have preferred an Englishman in charge of the national team, but is looking forward to working with Australian Wayne Bennett.",
+    "sgus": [
+      "O'Loughlin says he would have preferred an Englishman as coach",
+      "O'Loughlin says he is looking forward to working with Bennett",
+      "O'Loughlin says he would have preferred an Englishman as coach",
+      "O'Loughlin says he would have preferred an Englishman as coach",
+      "O'Loughlin says he would have preferred an Englishman as coach"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-68",
+    "summary": "Promotion-chasing Stevenage were held to a by Cambridge in League Two.",
+    "sgus": [
+      "Promotion-chasing Stevenage were held to a draw by Cambridge.",
+      "Cambridge in League Two",
+      "Stevenage were held to a draw",
+      "Stevenage were held to a by Cambridge"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-69",
+    "summary": "Yet again, we are looking at shocking pictures of a plane crash.",
+    "sgus": [
+      "We are looking at shocking pictures of a plane crash again"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-70",
+    "summary": "Prime Minister David Cameron will later attempt to halt the civil war in his party caused by Iain Duncan Smith's resignation from the cabinet.",
+    "sgus": [
+      "Iain Duncan Smith resigns from the Conservative cabinet"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-71",
+    "summary": "The percentage of Americans living in poverty is statistically unchanged from 2010's record high, even as household income fell, a US Census report says.",
+    "sgus": [
+      "Income fell",
+      "Americans living in poverty is statistically unchanged from 2010's record high",
+      "The percentage of Americans living in poverty is statistically unchanged from 2010's record high"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-72",
+    "summary": "A 34-year-old woman who was injured in an attack by a knifeman on a Swiss train has died in hospital, police say.",
+    "sgus": [
+      "A knifeman attacked a train in Switzerland",
+      "The injured woman was 34 years old",
+      "Police said the injured woman died in hospital"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-73",
+    "summary": "Boeing has shown off its \"space bins\" that can hold 50% more luggage than existing designs.",
+    "sgus": [
+      "\"Space bins\" can hold 50% more luggage than existing designs",
+      "Boeing has shown off its space bins",
+      "Space bins can hold 50% more luggage than existing designs"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-74",
+    "summary": "Australia is a step closer to exporting live cattle to China, opening a new market for its farmers.",
+    "sgus": [
+      "Australia is a step closer to exporting live cattle to China",
+      "opportunities for Australia's farmers open up in China live cattle market"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-75",
+    "summary": "Anthony Joshua's world title bout with Wladimir Klitschko comes at the \"perfect time\", says former undisputed heavyweight champion Lennox Lewis.",
+    "sgus": [
+      "Joshua-Klitschko fight comes at the \"perfect time\"",
+      "Former undisputed heavyweight champion Lennox Lewis",
+      "Lewis was heavyweight champion"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-76",
+    "summary": "People with hidden health conditions are being offered \"Please offer me a seat\" badges in a bid to help ease their suffering on London transport.",
+    "sgus": [
+      "People with hidden health conditions are being offered \"Please offer me a seat\" badges",
+      "The badges are part of a bid to help ease their suffering"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-77",
+    "summary": "Leicester Tigers have signed new England loose-head prop Ellis Genge from newly-promoted Bristol.",
+    "sgus": [
+      "Genge is a loose-head prop",
+      "Bristol became a  newly-promoted side",
+      "Leicester Tigers have signed new players",
+      "Leicester Tigers are a rugby union club"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-78",
+    "summary": "Keith Farmer followed up his double at Knockhill by winning the Supersport sprint race at Snetterton on Saturday.",
+    "sgus": [
+      "Farmer won the Supersport sprint race",
+      "Farmer followed his double at Knockhill by winning the Supersport sprint race"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-79",
+    "summary": "Northern Ireland striker Conor Washington counts himself a lucky man as he prepares to head to Euro 2016.",
+    "sgus": [
+      "Conor Washington is a Northern Ireland striker",
+      "Conor Washington counts himself a lucky man",
+      "Washington will play Euro 2016 for Northern Ireland",
+      "Northern Ireland prepares for Euro 2016"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-80",
+    "summary": "The Reality Check team answers more of your questions about the implications of the UK's vote to leave the European Union.",
+    "sgus": [
+      "The Reality Check team answers more of your questions",
+      "The Reality Check team answers questions about the implications of the UK's vote to leave the EU",
+      "The Reality Check team is answering questions"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-81",
+    "summary": "Principality Stadium chief executive Martyn Phillips would relish the chance to host an Anthony Joshua bout at the 74,500 capacity Cardiff venue.",
+    "sgus": [
+      "Phillips would love to host Joshua bout",
+      "Proposed Principality Stadium is 74,500 capacity",
+      "Phillips would relish the chance to host an Joshua bout ",
+      "Proposed Principality Stadium is in Cardiff"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-82",
+    "summary": "Google's net income rose 17% to $3.93bn in the three months to June from the quarter last year, boosted by an 11% rise in revenues to $17.7bn.",
+    "sgus": [
+      "Revenues rose 11%",
+      "Google's net income rose 17%",
+      "Google's net income rose 17% in the quarter",
+      "revenues were $17.7bn"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-83",
+    "summary": "Pregnant women should visit countries with a risk of malaria only if their trip is essential, experts are warning.",
+    "sgus": [
+      "Pregnant women should visit countries with a risk of malaria only if their trip is essential",
+      "Expeditions to malaria risk countries must have prudence",
+      "Scientists warn women about visiting high-risk countries"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-84",
+    "summary": "In Africa's schools, old-fashioned, dusty textbooks are gradually being replaced by tablets, computers and mobile phones.",
+    "sgus": [
+      "For Africa's schools, old-fashioned, dusty textbooks are being replaced by computers, tablets and mobile phones",
+      "Africa's schools are gradually computerizing and  wirelessing.",
+      "Africa's schools are gradually digitalizing.",
+      "Africa's schools have slowly begun replacing dusty textbooks with computers and tablets."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-85",
+    "summary": "More than half of Scots have run out of money before pay day, according to a new report.",
+    "sgus": [
+      "Scots have short cash",
+      "Scots out of money before pay day"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-86",
+    "summary": "The Taliban's capture of the strategically-located Sangin, once considered the deadliest battlefield for US and British troops in Afghanistan, will increase the group's mobility in the north of the province and give it control of an important supply line with the provincial capital Lashkar Gah",
+    "sgus": [
+      "The Taliban's capture of Sangin, once considered the deadliest battlefield for US and British troops "
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-87",
+    "summary": "Western Sahara is a sparsely-populated area of mostly desert situated on the northwest coast of Africa.",
+    "sgus": [
+      "Africa has a northwest coast.",
+      "The area is known as the Western Sahara.",
+      "Western Sahara is sparsely populated."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-88",
+    "summary": "Deputy First Minister John Swinney will give MSPs his response to a report into the death of Aberdeen schoolboy Bailey Gwynne next week.",
+    "sgus": [
+      "John Swinney is the deputy first minister",
+      "J Swinney will give msps his response to a report into the death of Aberdeen schoolboy Bailey Gwynne"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-89",
+    "summary": "Police at the Download Festival have kept their promise and have been posing for fan photos despite extra security.",
+    "sgus": [
+      "Police at the Download Festival have posed for photos",
+      "Police at the Download Festival promised they would pose for photos"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-90",
+    "summary": "Competition for nesting sites could explain why some birds and bumblebees are declining faster than others.",
+    "sgus": [
+      "Competition for nesting sites could explain why some birds and bumblebees are declining faster than others",
+      "Competition for nesting sites could explain why some birds are declining faster",
+      "Declines in some species could be explained by competition for nesting sites",
+      "Some organisms are declining faster than others"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-91",
+    "summary": "The UK should not have to pay \"large\" sums to the EU to trade with it after Brexit, Boris Johnson has said.",
+    "sgus": [
+      "The UK should not have to pay to trade with the EU",
+      "Boris Johnson said the UK should not have to pay \"large\" sums to the EU "
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-92",
+    "summary": "A grizzly bear has attacked and killed a cyclist just outside the Glacier National Park in the northern US state of Montana, police say.",
+    "sgus": [
+      "A cyclist was killed",
+      "The cyclist was killed just outside Glacier National Park",
+      "Montana is a northern US state",
+      "Grizzly bears are grizzly bears",
+      "Grizzly bears are grizzly bears --"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-93",
+    "summary": "A man has been arrested over the \"violent assault\" and rape of a woman in a railway station car park, police have said.",
+    "sgus": [
+      "A man has been arrested for the rape of a woman in a railway station car park"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-94",
+    "summary": "A diabetic MP who asked Coca-Cola not to take its Christmas truck to Leicester has been accused of hypocrisy for opening a sweet shop in the city.",
+    "sgus": [
+      "Was asked not to take a Christmas truck to Leicester",
+      "Leicester is a city"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-95",
+    "summary": "An Orlando mother who was found not guilty of murdering her two-year old daughter Caylee has broken her silence six years later.",
+    "sgus": [
+      "Arrington spoke publicly six years later"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-96",
+    "summary": "The devolution settlement for Wales is less fair than those offered to Scotland and Northern Ireland, the Archbishop of Wales has said.",
+    "sgus": [
+      "Wales was offered less devolution than the other two countries.",
+      "The devolution settlement for Wales is less fair than those offered to Scotland and Northern Ireland",
+      "The Archbishop of Wales speaks/argued that Wales was offered less devolution than the other two countries"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-97",
+    "summary": "Labour will keep its election promises despite uncertainty over Brexit, but cuts to some services are inevitable, the first minister has warned.",
+    "sgus": [
+      "There is uncertainty about Britain's continued membership of the EU",
+      "The first minister has warned about cuts to some services."
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-98",
+    "summary": "A convicted fraudster used an \"ingenious\" escape plot to trick prison wardens into letting him go free, a court has heard.",
+    "sgus": [
+      "Convicted fraudster used escape plot",
+      "Convicted fraudster used ingenious escape plot"
+    ]
+  },
+  {
+    "instance_id": "pyrxsum-99",
+    "summary": "The M6 motorway between Wolverhampton and Walsall has reopened after a fatal crash.",
+    "sgus": [
+      "The M6 motorway between Wolverhampton and Walsall had reopened."
+    ]
+  }
+]
