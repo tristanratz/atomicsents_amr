@@ -1128,7 +1128,7 @@ def sentences_with_verbs(sentences):
             verb_sentences.append(sentence)
 
     return verb_sentences
-
+from Lite2_3Pyramid.metric.extract_stus import _get_and_replace_coref
 
 def run_amr(filename, data_json):
     outputDict = []
@@ -1142,19 +1142,25 @@ def run_amr(filename, data_json):
             # print("Summary:", example['summary'])
             se = example['summary']
 
-            docs = [se]  # nlp(se)
-            updated_docs = []
-            for doc in nlp.pipe(docs):
-                new_doc = []
-                for token in doc:
-                    tok = doc._.coref_chains.resolve(token) or token
-                    tok_text = ' and '.join([t.text for t in tok]) if (isinstance(tok, list)) else tok.text
-                    tok_text += token.whitespace_
-                    new_doc.append(tok_text)
+            # coreference tool to update summaries
+            # docs = [se]  # nlp(se)
+            # updated_docs = []
+            # for doc in nlp.pipe(docs):
+            #     new_doc = []
+            #     for token in doc:
+            #         tok = doc._.coref_chains.resolve(token) or token
+            #         tok_text = ' and '.join([t.text for t in tok]) if (isinstance(tok, list)) else tok.text
+            #         tok_text += token.whitespace_
+            #         new_doc.append(tok_text)
+            #
+            #     updated_docs.append(''.join(new_doc))
+            # # print(''.join(updated_docs))
+            # se = ''.join(updated_docs)
 
-                updated_docs.append(''.join(new_doc))
-            # print(''.join(updated_docs))
-            se = ''.join(updated_docs)
+            # use coreference tool from Lite2_3Pyramid
+            #print(_get_and_replace_coref([se], [0], torch.device("mps")))
+            #return null
+
             # if "\u00a0" in se:
             #    se = se.replace("\u00a0", '')
             se = re.sub(r'\s+', ' ', se)
@@ -1195,7 +1201,7 @@ def run_amr(filename, data_json):
                 # print("  ")
                 dict_tag = get_concepts(g_tag)
                 temp_sent_list = []
-                for sgf in [get_subgraphs]:#4_plus]:  # , get_subgraphs, get_subgraphs2, get_subgraphs3, get_subgraphs4]:
+                for sgf in [get_subgraphs4_plus]:  # , get_subgraphs, get_subgraphs2, get_subgraphs3, get_subgraphs4]:
                     subgraphs = sgf(g)
                     # Fallback okay ? --> Original sentence for default if too short?
                     # if 0 == len(subgraphs):
@@ -1213,20 +1219,20 @@ def run_amr(filename, data_json):
                     sents, _ = gtos.generate_taged(subgraphs_tag, disable_progress=True)
                     temp_sent_list.extend(sents)
 
-                result_sents = temp_sent_list
-                result_trees = list_of_trees
+                #result_sents = temp_sent_list
+                #result_trees = list_of_trees
 
                 # Filter sentences
                 # take top k sentences from nli
-                # nli_rank = sent_in_summary(s, temp_sent_list, True)
-                # nli_rank_sorted = nli_rank.copy()
-                # nli_rank_sorted.sort(reverse=True)
-                # nli_rank_sorted = nli_rank_sorted[:5]
+                nli_rank = sent_in_summary(s, temp_sent_list, True)
+                nli_rank_sorted = nli_rank.copy()
+                nli_rank_sorted.sort(reverse=True)
+                nli_rank_sorted = nli_rank_sorted[:5]
 
-                # for i, sentence in enumerate(temp_sent_list):
-                #     if nli_rank[i] in nli_rank_sorted and sentence not in result_sents:
-                #         result_sents.append(sentence)
-                #         result_trees.append(list_of_trees[i])
+                for i, sentence in enumerate(temp_sent_list):
+                    if nli_rank[i] in nli_rank_sorted and sentence not in result_sents:
+                        result_sents.append(sentence)
+                        result_trees.append(list_of_trees[i])
 
                 # # check sentence relevance
                 # nli_check_bool = sent_in_summary(s, temp_sent_list)
@@ -1321,11 +1327,17 @@ def run_amr_data(scus, result_path):
 
 
 if __name__ == '__main__':
-    run_amr_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-scus.json'),
-                 'eval_interface/src/data/pyrxsum/pyrxsum-smus.json')
+    # run_amr_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-scus.json'),
+    #              'eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v10.json')
 
-    run_amr_data(open_json_file('eval_interface/src/data/realsumm/realsumm-scus.json'),
-                 'eval_interface/src/data/realsumm/realsumm-smus.json')
+    # run_amr_data(open_json_file('eval_interface/src/data/realsumm/realsumm-scus.json'),
+    #              'eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v10.json')
+
+    run_amr_data(open_json_file('eval_interface/src/data/tac08/tac08-scus.json'),
+                 'eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json')
+
+    run_amr_data(open_json_file('eval_interface/src/data/tac09/tac09-scus.json'),
+                 'eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json')
 
     # run_amr_data(open_json_file('eval_interface/src/data/cnndm/cnndm_test-scus.json'),
     #              'eval_interface/src/data/cnndm/cnndm-smus-sg1-test.json')

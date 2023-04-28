@@ -140,6 +140,31 @@ def corr_evaluate_pyrxsum():
     #                                     open_json_file(
     #                                         'eval_interface/src/data/pyrxsum/pyrxsum-golden-labels.json'))
 
+def corr_evaluate_tac08():
+    print("tac08 start!")
+
+    result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/tac08/tac08-system-summary.json'),
+                                    open_json_file('eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json'))
+
+    save_dict_to_json(result_Dict, 'eval_interface/src/data/tac08/tac08-nli-score-smu.json')
+
+    return calc_corr_summary_and_system(result_Dict,
+                                        open_json_file(
+                                            'eval_interface/src/data/tac08/tac08-golden-labels.json'))
+
+def corr_evaluate_tac09():
+    print("tac09 start!")
+
+    result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/tac09/tac09-system-summary.json'),
+                                    open_json_file('eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json'))
+
+    save_dict_to_json(result_Dict, 'eval_interface/src/data/tac09/tac09-nli-score-smu.json')
+
+    return calc_corr_summary_and_system(result_Dict,
+                                        open_json_file(
+                                            'eval_interface/src/data/tac09/tac09-golden-labels.json'))
+
+
 
 def nli_evaluate_data(summarys, smus):
     return nli_evaluation_from_paper(summarys, smus)
@@ -147,8 +172,10 @@ def nli_evaluate_data(summarys, smus):
 
 def corr_evaluation_datase():
     list_of_results = []
-    list_of_results.append(corr_evaluate_pyrxsum())
-    list_of_results.append(corr_evaluate_realsumm())
+    #list_of_results.append(corr_evaluate_pyrxsum())
+    #list_of_results.append(corr_evaluate_realsumm())
+    list_of_results.append(corr_evaluate_tac08())
+    list_of_results.append(corr_evaluate_tac09())
 
     write_to_json(list_of_results, 'data/extrinsic_evaluation-smu-sg4-plus-v9.json')
 

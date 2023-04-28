@@ -1,0 +1,23 @@
+[
+  {
+    "instance_id": "pyrxsum-0",
+    "summary": "Netherlands midfielder Wesley Sneijder has joined French Ligue 1 side Nice on a free transfer.",
+    "summary_trees": [
+      "# ::snt Netherlands midfielder Wesley Sneijder has joined French Ligue 1 side Nice on a free transfer.\n(j / join-04\n      :ARG0 (p / person\n            :name (n / name\n                  :op1 \"Wesley\"\n                  :op2 \"Sneijder\")\n            :ARG0-of (h / have-org-role-91\n                  :ARG1 (t / team\n                        :name (n2 / name\n                              :op1 \"Netherlands\"))\n                  :ARG3 (m / midfielder)))\n      :ARG1 (t2 / team\n            :name (n3 / name\n                  :op1 \"Nice\")\n            :mod (l / league\n                  :name (n4 / name\n                        :op1 \"Ligue\"\n                        :op2 1)\n                  :mod (c / country\n                        :name (n5 / name\n                              :op1 \"France\"))))\n      :manner (t3 / transfer-01\n            :ARG1 p\n            :ARG1-of (f / free-03)))"
+    ],
+    "tree": [
+      "(j / join-04\n   :ARG0 (p / person\n            :name (n / name\n                     :op1 \"Wesley\"\n                     :op2 \"Sneijder\")))",
+      "(j / join-04\n   :ARG0 (p / person\n            :ARG0 (h / have-org-role-91\n                     :ARG3 (m / midfielder))))",
+      "(j / join-04\n   :ARG0 (p / person\n            :name (n / name\n                     :op1 \"Wesley\"\n                     :op2 \"Sneijder\"))\n   :ARG1 (t2 / team\n             :name (n3 / name\n                       :op1 \"Nice\")))",
+      "(j / join-04\n   :ARG0 (p / person\n            :ARG0 (h / have-org-role-91\n                     :ARG3 (m / midfielder)))\n   :ARG1 (t2 / team\n             :name (n3 / name\n                       :op1 \"Nice\")))",
+      "(j / join-04\n   :ARG0 (p / person\n            :name (n / name\n                     :op1 \"Wesley\"\n                     :op2 \"Sneijder\"))\n   :ARG1 (t2 / team\n             :name (n3 / name\n                       :op1 \"Nice\"))\n   :manner (t3 / transfer-01\n               :ARG1 p\n               :ARG1 (f / free-03)))"
+    ],
+    "smus": [
+      "Wesley Sneijder has joined.",
+      "The midfielder has joined.",
+      "Wesley Sneijder has joined Nice.",
+      "The midfielder has joined Nice.",
+      "Wesley Sneijder has joined Nice on a free transfer."
+    ]
+  }
+]

@@ -260,8 +260,8 @@ def evaluate_realsumm(rouge=True, bert=False, mover=False):
 
 
 # Tac2008 dataset
-def evaluate_tac08(smus, stus, scus, result_path, rouge=True, bert=False, mover=False):
-    smus = open_json_file('eval_interface/src/data/tac08/tac2008-smus.json')
+def evaluate_tac08(rouge=True, bert=False, mover=False):
+    smus = open_json_file('eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json')
     stus = open_json_file('eval_interface/src/data/tac08/tac2008-stus.json')
     scus = open_json_file('eval_interface/src/data/tac08/tac2008-scus.json')
 
@@ -270,8 +270,8 @@ def evaluate_tac08(smus, stus, scus, result_path, rouge=True, bert=False, mover=
 
 
 # Tac2009 dataset !!! stu d0913-A has "?" devided by 0 error
-def evaluate_tac09(smus, stus, scus, result_path,  rouge=True, bert=False, mover=False):
-    smus = open_json_file('eval_interface/src/data/tac09/tac2009-smus.json')
+def evaluate_tac09(rouge=True, bert=False, mover=False):
+    smus = open_json_file('eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json')
     stus = open_json_file('eval_interface/src/data/tac09/tac2009-stus.json')
     scus = open_json_file('eval_interface/src/data/tac09/tac2009-scus.json')
 
@@ -303,8 +303,8 @@ def debug():
 
 
 if __name__ == '__main__':
-    evaluate_pyrxsum(True, True, False)
-    evaluate_realsumm(True, True, False)
-    # evaluate_tac08(False, True, False)
-    # evaluate_tac09(False, True, False)
+    # evaluate_pyrxsum(True, True, False)
+    # evaluate_realsumm(True, True, False)
+    evaluate_tac08(True, True, False)
+    evaluate_tac09(True, True, False)
     # debug()
