@@ -11,6 +11,7 @@ export enum Metric {
 }
 
 export enum Subgraph {
+    SG = "SG",
     SG2 = "SG2",
     SG3 = "SG3",
     SG4 = "SG4",

@@ -4,16 +4,20 @@ import scusRealsumm from "../data/realsumm/realsumm-scus.json";
 import stusPyrXsum from "../data/pyrxsum/pyrxsum-stus.json";
 import stusRealsumm from "../data/realsumm/realsumm-stus.json";
 
+import smusSGPyrXsum from "../data/pyrxsum/pyrxsum-smus.json";
 import smusSG2PyrXsum from "../data/pyrxsum/pyrxsum-smus-sg2.json";
 import smusSG3PyrXsum from "../data/pyrxsum/pyrxsum-smus-sg3-v2.json";
 import smusSG4PyrXsum from "../data/pyrxsum/pyrxsum-smus-sg4-plus-v9.json";
+import smusSGRealsumm from "../data/realsumm/realsumm-smus.json";
 import smusSG2Realsumm from "../data/realsumm/realsumm-smus-sg2.json";
 import smusSG3Realsumm from "../data/realsumm/realsumm-smus-sg3-v2.json";
 import smusSG4Realsumm from "../data/realsumm/realsumm-smus-sg4-plus-v9.json";
 
+import accSGPyrXsum from "../data/pyrxsum/pyrxsum-acc.json";
 import accSG2PyrXsum from "../data/pyrxsum/pyrxsum-acc-sg2.json";
 import accSG3PyrXsum from "../data/pyrxsum/pyrxsum-acc-sg3-v2.json";
 import accSG4PyrXsum from "../data/pyrxsum/pyrxsum-acc-sg4-plus-v9.json";
+import accSGRealsumm from "../data/realsumm/realsumm-acc.json";
 import accSG2Realsumm from "../data/realsumm/realsumm-acc-sg2.json";
 import accSG3Realsumm from "../data/realsumm/realsumm-acc-sg3-v2.json";
 import accSG4Realsumm from "../data/realsumm/realsumm-acc-sg4-plus-v9.json";
@@ -52,9 +56,11 @@ interface SMUSData {
     }[];
 }
 const smusData: SMUSData = {
+    "smusSGPyrXsum": smusSGPyrXsum,
     "smusSG2PyrXsum": smusSG2PyrXsum,
     "smusSG3PyrXsum": smusSG3PyrXsum,
     "smusSG4PyrXsum": smusSG4PyrXsum,
+    "smusSGRealsumm": smusSGRealsumm,
     "smusSG2Realsumm": smusSG2Realsumm,
     "smusSG3Realsumm": smusSG3Realsumm,
     "smusSG4Realsumm": smusSG4Realsumm,
@@ -74,9 +80,11 @@ interface ACCData {
     }[];
 }
 const accData: ACCData = {
+    "accSGPyrXsum": accSGPyrXsum,
     "accSG2PyrXsum": accSG2PyrXsum,
     "accSG3PyrXsum": accSG3PyrXsum,
     "accSG4PyrXsum": accSG4PyrXsum,
+    "accSGRealsumm": accSG2Realsumm,  // TODO: give the right dataset ---> acc SG not SG2
     "accSG2Realsumm": accSG2Realsumm,
     "accSG3Realsumm": accSG3Realsumm,
     "accSG4Realsumm": accSG4Realsumm,
