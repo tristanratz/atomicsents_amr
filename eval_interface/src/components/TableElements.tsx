@@ -22,6 +22,9 @@ export function TableElements(props: Props) {
     // If there is some line break missing in the tree the method adds it
     const repairTree = (tree: string, length: number, i: number) => {
         console.log(tree);
+        if(tree === undefined){
+            return ''
+        }
         const xy = length > i && tree.split(':').map((leave, index) => {
             if (index === 0) {
                 return leave
