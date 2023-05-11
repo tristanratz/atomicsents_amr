@@ -1,5 +1,7 @@
 import json
 import csv
+import multiprocessing
+
 from tqdm import tqdm
 import amrlib as amrlib
 import penman
@@ -19,6 +21,9 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, pairwise_distances_argmin_min
 import numpy as np
 import coreferee
+
+from Lite2_3Pyramid.metric.extract_stus import _get_and_replace_coref
+
 
 spacy_o = spacy.load("en_core_web_sm")
 nlp = spacy.load("en_core_web_sm")
@@ -789,7 +794,7 @@ def delete_and_node(tree):
     for i, node in enumerate(tree):
         if i == 0:
             continue
-        elif node[2] == "and":
+        elif node[2] == "and" and i < (len(tree) - 1):
             y = list(tree[i - 1])
             y[2] = tree[i + 1][2]
             tree[i - 1] = tuple(y)
@@ -1128,38 +1133,67 @@ def sentences_with_verbs(sentences):
             verb_sentences.append(sentence)
 
     return verb_sentences
-from Lite2_3Pyramid.metric.extract_stus import _get_and_replace_coref
+
+
+
+
+def inner_thread(inputs, top_k):
+    s, g, g_tag = inputs
+    summary_trees = [g]
+    list_of_sents = []
+    list_of_trees = []
+    result_sents = []
+    result_trees = []
+
+    # print("  ")
+    # print("AMR subgraphs:")
+    # print("  ")
+    dict_tag = get_concepts(g_tag)
+    temp_sent_list = []
+    for sgf in [get_subgraphs4_plus]:  # , get_subgraphs, get_subgraphs2, get_subgraphs3, get_subgraphs4]:
+        subgraphs = sgf(g)
+        # Fallback okay ? --> Original sentence for default if too short?
+        # if 0 == len(subgraphs):
+        #    subgraphs = get_subgraphs(g)
+
+        subgraphs_tag = []
+        for sb in subgraphs:
+            sb = maybe_fix_unlinked_in_subgraph(g, sb)
+            list_of_trees.append(sb)
+            sb = gstring_to_oneline(sb)
+            sb = replace_graph_with_tags(dict_tag, sb)
+            subgraphs_tag.append(sb)
+            # print("-")
+
+        sents, _ = gtos.generate_taged(subgraphs_tag, disable_progress=True)
+        temp_sent_list.extend(sents)
+
+    # result_sents = temp_sent_list
+    # result_trees = list_of_trees
+
+    # Filter sentences
+    # take top k sentences from nli
+    nli_rank = sent_in_summary(s, temp_sent_list, True)
+    nli_rank_sorted = nli_rank.copy()
+    nli_rank_sorted.sort(reverse=True)
+    nli_rank_sorted = nli_rank_sorted[:top_k]
+
+    for i, sentence in enumerate(temp_sent_list):
+        if nli_rank[i] in nli_rank_sorted and sentence not in result_sents:
+            result_sents.append(sentence)
+            result_trees.append(list_of_trees[i])
+    return summary_trees, result_sents, result_trees
+
 
 def run_amr(filename, data_json):
     outputDict = []
     duplicate_counter = 0
 
-    for index_i, example in enumerate(data_json):
-        if index_i not in [0] and False:  # [17][5, 61, 86, 38]:# and False:
-            print(f"Skip example: {example['instance_id']}")
+    for index_i, key in enumerate(data_json.keys()):
+        if index_i not in [29] and False:  # [17][5, 61, 86, 38]:# and False:
+            print(f"Skip example: {key}")
         else:
-            # print("Id:", example['instance_id'])
-            # print("Summary:", example['summary'])
-            se = example['summary']
-
-            # coreference tool to update summaries
-            # docs = [se]  # nlp(se)
-            # updated_docs = []
-            # for doc in nlp.pipe(docs):
-            #     new_doc = []
-            #     for token in doc:
-            #         tok = doc._.coref_chains.resolve(token) or token
-            #         tok_text = ' and '.join([t.text for t in tok]) if (isinstance(tok, list)) else tok.text
-            #         tok_text += token.whitespace_
-            #         new_doc.append(tok_text)
-            #
-            #     updated_docs.append(''.join(new_doc))
-            # # print(''.join(updated_docs))
-            # se = ''.join(updated_docs)
-
-            # use coreference tool from Lite2_3Pyramid
-            #print(_get_and_replace_coref([se], [0], torch.device("mps")))
-            #return null
+            se = data_json[key][0]
 
             # if "\u00a0" in se:
             #    se = se.replace("\u00a0", '')
@@ -1170,69 +1204,93 @@ def run_amr(filename, data_json):
                 # regex to extract required strings
                 reg_str = "<" + tag + ">(.*?)</" + tag + ">"
                 sentences = re.findall(reg_str, se)
+                top_k = 5
             elif "pyrxsum" in filename:
                 sentences = [se]
+                top_k = 5
             else:
                 page_doc = spacy_o(se, disable=["tagger"])
                 sentences = [se.text for se in page_doc.sents]
+                top_k = 2
             # sentences.encode("utf-8").decode("utf-8", "replace")
 
             # sentences = list(map(lambda string: "".join(
             #    map(lambda x: "_" if string.find("'") <= x[0] < string.find("'", string.find("'") + 1) and x[1] == " " else x[1], enumerate(string))) if "'" in string else string, sentences))
             # print(sentences)
 
-            graphs, graphs_tags = stog.parse_sents(sentences, add_metadata=True)
+            # Filter the sentence if they contain words
+            filtered_sentences = []
+            for sentence in sentences:
+                num_count = sum(c.isdigit() for c in sentence)
+                num_char = sum(1 for c in sentence)
+                if num_count / num_char < 0.5:
+                    sen = sentence.split(';')
+                    if len(sen) == 1:
+                        filtered_sentences.append(sentence)
+                    else:
+                        for s in sen:
+                            if len(s) > 3:
+                                filtered_sentences.append(s)
+
+            graphs, graphs_tags = stog.parse_sents(filtered_sentences, add_metadata=True)
 
             # print("  ")
             # print("  ")
-            print(example['instance_id'])
+            print(key)
             list_of_sents = []
             list_of_trees = []
             result_sents = []
             result_trees = []
             summary_trees = []
+
+            pool = multiprocessing.Pool(6)
+            results = []
+
             for idx, (s, g, g_tag) in enumerate(zip(sentences, graphs, graphs_tags)):
-                summary_trees.append(g)
-                list_of_sents = []
-                list_of_trees = []
+                res = pool.apply_async(inner_thread, args=((s, g, g_tag), top_k))
+                results.append(res)
 
-                # print("  ")
-                # print("AMR subgraphs:")
-                # print("  ")
-                dict_tag = get_concepts(g_tag)
-                temp_sent_list = []
-                for sgf in [get_subgraphs4_plus]:  # , get_subgraphs, get_subgraphs2, get_subgraphs3, get_subgraphs4]:
-                    subgraphs = sgf(g)
-                    # Fallback okay ? --> Original sentence for default if too short?
-                    # if 0 == len(subgraphs):
-                    #    subgraphs = get_subgraphs(g)
-
-                    subgraphs_tag = []
-                    for sb in subgraphs:
-                        sb = maybe_fix_unlinked_in_subgraph(g, sb)
-                        list_of_trees.append(sb)
-                        sb = gstring_to_oneline(sb)
-                        sb = replace_graph_with_tags(dict_tag, sb)
-                        subgraphs_tag.append(sb)
-                        # print("-")
-
-                    sents, _ = gtos.generate_taged(subgraphs_tag, disable_progress=True)
-                    temp_sent_list.extend(sents)
-
-                #result_sents = temp_sent_list
-                #result_trees = list_of_trees
-
-                # Filter sentences
-                # take top k sentences from nli
-                nli_rank = sent_in_summary(s, temp_sent_list, True)
-                nli_rank_sorted = nli_rank.copy()
-                nli_rank_sorted.sort(reverse=True)
-                nli_rank_sorted = nli_rank_sorted[:5]
-
-                for i, sentence in enumerate(temp_sent_list):
-                    if nli_rank[i] in nli_rank_sorted and sentence not in result_sents:
-                        result_sents.append(sentence)
-                        result_trees.append(list_of_trees[i])
+                # summary_trees.append(g)
+                # list_of_sents = []
+                # list_of_trees = []
+                #
+                # # print("  ")
+                # # print("AMR subgraphs:")
+                # # print("  ")
+                # dict_tag = get_concepts(g_tag)
+                # temp_sent_list = []
+                # for sgf in [get_subgraphs4_plus]:  # , get_subgraphs, get_subgraphs2, get_subgraphs3, get_subgraphs4]:
+                #     subgraphs = sgf(g)
+                #     # Fallback okay ? --> Original sentence for default if too short?
+                #     # if 0 == len(subgraphs):
+                #     #    subgraphs = get_subgraphs(g)
+                #
+                #     subgraphs_tag = []
+                #     for sb in subgraphs:
+                #         sb = maybe_fix_unlinked_in_subgraph(g, sb)
+                #         list_of_trees.append(sb)
+                #         sb = gstring_to_oneline(sb)
+                #         sb = replace_graph_with_tags(dict_tag, sb)
+                #         subgraphs_tag.append(sb)
+                #         # print("-")
+                #
+                #     sents, _ = gtos.generate_taged(subgraphs_tag, disable_progress=True)
+                #     temp_sent_list.extend(sents)
+                #
+                # #result_sents = temp_sent_list
+                # #result_trees = list_of_trees
+                #
+                # # Filter sentences
+                # # take top k sentences from nli
+                # nli_rank = sent_in_summary(s, temp_sent_list, True)
+                # nli_rank_sorted = nli_rank.copy()
+                # nli_rank_sorted.sort(reverse=True)
+                # nli_rank_sorted = nli_rank_sorted[:top_k]
+                #
+                # for i, sentence in enumerate(temp_sent_list):
+                #     if nli_rank[i] in nli_rank_sorted and sentence not in result_sents:
+                #         result_sents.append(sentence)
+                #         result_trees.append(list_of_trees[i])
 
                 # # check sentence relevance
                 # nli_check_bool = sent_in_summary(s, temp_sent_list)
@@ -1270,10 +1328,18 @@ def run_amr(filename, data_json):
                 #     if sentence in sent_list and sentence not in result_sents:
                 #         result_sents.append(sentence)
                 #         result_trees.append(list_of_trees[i])
+            pool.close()
+            pool.join()
+            for res in results:
+                s_t, r_s, r_t = res.get()
+                summary_trees.extend(s_t)
+                result_sents.extend(r_s)
+                result_trees.extend(r_t)
+                # do something with the results
 
             outputDict.append(
-                {'instance_id': example['instance_id'],
-                 'summary': se,  # example['summary'],
+                {'instance_id': key,
+                 'summary': se,
                  'summary_trees': summary_trees,
                  'tree': result_trees,
                  'smus': result_sents, }
@@ -1323,18 +1389,21 @@ def run_realsumm_amr(scu_path, result_path):
 
 
 def run_amr_data(scus, result_path):
-    run_amr(result_path, scus)
+    index = [value['instance_id'] for value in scus]
+    summaries = [value['summary'] for value in scus]
+    golden_summaries = _get_and_replace_coref(summaries, index, torch.device("cuda"))
+    run_amr(result_path, golden_summaries)
 
 
 if __name__ == '__main__':
     # run_amr_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-scus.json'),
     #              'eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v10.json')
-
+    #
     # run_amr_data(open_json_file('eval_interface/src/data/realsumm/realsumm-scus.json'),
     #              'eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v10.json')
 
-    run_amr_data(open_json_file('eval_interface/src/data/tac08/tac08-scus.json'),
-                 'eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json')
+    # run_amr_data(open_json_file('eval_interface/src/data/tac08/tac08-scus.json'),
+    #              'eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json')
 
     run_amr_data(open_json_file('eval_interface/src/data/tac09/tac09-scus.json'),
                  'eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json')
