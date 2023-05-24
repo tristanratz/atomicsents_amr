@@ -1,9 +1,12 @@
 import json
 import numpy as np
+import torch
+
 from Lite2_3Pyramid.reproduce.utils import system_level_correlation
 from Lite2_3Pyramid.reproduce.utils import summary_level_correlation
 from Lite2_3Pyramid.metric.score import score
 import matplotlib.pyplot as plt
+import multiprocessing
 
 
 def open_json_file(filename):
@@ -73,7 +76,7 @@ def nli_evaluation_from_paper(summarys, smus):
     for i in range(len(all_summarys)):
         print(f"System summary: {name_of_system[i]} ( {i + 1} / {len(all_summarys)} )")
         # outputTemp = {'instance_id': name_of_system[i]}
-        scores = score(all_summarys[i], all_sxus, detail=True)['l3c']
+        scores = score(all_summarys[i], all_sxus, detail=True, device=torch.device("mps"))['l3c']
         # outputTemp['mean'] = scores[0]
         # outputTemp['all'] = scores[1]
         # print(score(all_summarys[0], all_sxus, detail=True)['l3c'])
@@ -85,7 +88,7 @@ def nli_evaluation_from_paper(summarys, smus):
 
 def write_to_json(list_of_results, output_file):
     outputDict = []
-    list_of_datasets = ['pyrxsum', 'realsumm']
+    list_of_datasets = ['pyrxsum', 'realsumm', 'tac08', 'tac09']
     for i, result in enumerate(list_of_results):
         output_Temp = {'instance_id': list_of_datasets[i],
                        'pearson_system': result[0],
@@ -108,13 +111,17 @@ def save_dict_to_json(outputDict, file_name):
     jsonFile.close()
 
 
-def corr_evaluate_realsumm():
+def corr_evaluate_realsumm(load_data=False):
     print("REALSumm start!")
 
-    result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/realsumm/realsumm-system-summary.json'),
-                                    open_json_file('eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v9.json'))
+    if load_data:
+        result_Dict = open_json_file('eval_interface/src/data/realsumm/realsumm-nli-score-smu.json')
+    else:
+        result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/realsumm/realsumm-system-summary.json'),
+                                        open_json_file('eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v10.json'))
 
-    save_dict_to_json(result_Dict, 'eval_interface/src/data/realsumm/realsumm-nli-score-smu.json')
+        save_dict_to_json(result_Dict, 'eval_interface/src/data/realsumm/realsumm-nli-score-smu.json')
+
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
                                             'eval_interface/src/data/realsumm/realsumm-golden-labels.json'))
@@ -124,13 +131,15 @@ def corr_evaluate_realsumm():
     #                                         'eval_interface/src/data/realsumm/realsumm-golden-labels.json'))
 
 
-def corr_evaluate_pyrxsum():
+def corr_evaluate_pyrxsum(load_data=False):
     print("PyrXSum start!")
+    if load_data:
+        result_Dict = open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu.json')
+    else:
+        result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-system-summary.json'),
+                                        open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v10.json'))
 
-    result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-system-summary.json'),
-                                    open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v9.json'))
-
-    save_dict_to_json(result_Dict, 'eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu.json')
+        save_dict_to_json(result_Dict, 'eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu.json')
 
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
@@ -140,25 +149,31 @@ def corr_evaluate_pyrxsum():
     #                                     open_json_file(
     #                                         'eval_interface/src/data/pyrxsum/pyrxsum-golden-labels.json'))
 
-def corr_evaluate_tac08():
+def corr_evaluate_tac08(load_data=False):
     print("tac08 start!")
 
-    result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/tac08/tac08-system-summary.json'),
-                                    open_json_file('eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json'))
+    if load_data:
+        result_Dict = open_json_file('eval_interface/src/data/tac08/tac08-nli-score-smu.json')
+    else:
+        result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/tac08/tac08-system-summary.json'),
+                                        open_json_file('eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json'))
 
-    save_dict_to_json(result_Dict, 'eval_interface/src/data/tac08/tac08-nli-score-smu.json')
+        save_dict_to_json(result_Dict, 'eval_interface/src/data/tac08/tac08-nli-score-smu.json')
 
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
                                             'eval_interface/src/data/tac08/tac08-golden-labels.json'))
 
-def corr_evaluate_tac09():
+def corr_evaluate_tac09(load_data=False):
     print("tac09 start!")
 
-    result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/tac09/tac09-system-summary.json'),
-                                    open_json_file('eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json'))
+    if load_data:
+        result_Dict = open_json_file('eval_interface/src/data/tac09/tac09-nli-score-smu.json')
+    else:
+        result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/tac09/tac09-system-summary.json'),
+                                        open_json_file('eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json'))
 
-    save_dict_to_json(result_Dict, 'eval_interface/src/data/tac09/tac09-nli-score-smu.json')
+        save_dict_to_json(result_Dict, 'eval_interface/src/data/tac09/tac09-nli-score-smu.json')
 
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
@@ -172,12 +187,22 @@ def nli_evaluate_data(summarys, smus):
 
 def corr_evaluation_datase():
     list_of_results = []
-    #list_of_results.append(corr_evaluate_pyrxsum())
-    #list_of_results.append(corr_evaluate_realsumm())
-    list_of_results.append(corr_evaluate_tac08())
-    list_of_results.append(corr_evaluate_tac09())
+    pool = multiprocessing.Pool(4)
 
-    write_to_json(list_of_results, 'data/extrinsic_evaluation-smu-sg4-plus-v9.json')
+    list_of_results.append(pool.apply_async(corr_evaluate_pyrxsum).get())
+    list_of_results.append(pool.apply_async(corr_evaluate_realsumm).get())
+    list_of_results.append(pool.apply_async(corr_evaluate_tac08).get())
+    list_of_results.append(pool.apply_async(corr_evaluate_tac09).get())
+
+    pool.close()
+    pool.join()
+
+    # list_of_results.append(corr_evaluate_pyrxsum())
+    # list_of_results.append(corr_evaluate_realsumm())
+    # list_of_results.append(corr_evaluate_tac08())
+    # list_of_results.append(corr_evaluate_tac09())
+
+    write_to_json(list_of_results, 'data/extrinsic_evaluation-smu-sg4-plus-v10.json')#result_list, 'data/extrinsic_evaluation-smu-sg4-plus-v10.json')
 
 
 def plot_results():

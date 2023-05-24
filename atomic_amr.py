@@ -24,7 +24,6 @@ import coreferee
 
 from Lite2_3Pyramid.metric.extract_stus import _get_and_replace_coref
 
-
 spacy_o = spacy.load("en_core_web_sm")
 nlp = spacy.load("en_core_web_sm")
 
@@ -559,181 +558,193 @@ def get_subgraphs4_plus(amr_graph):
             g.triples[i] = (node[2], node[1], node[0])
             linked_nodes_check.append(node[0])
 
-    # Split by every predicate
-    check_predicate = lambda string: any([char.isdigit() for char in string.split("-")[-2:]])
-    left_set, right_set = set([elem[0] for elem in g.triples]), set([elem[2] for elem in g.triples])
-    of_labels = list(left_set.difference(right_set))
-    if g.triples[0][0] in of_labels:
-        of_labels.remove(g.triples[0][0])
+    if g.triples[0][2] == "and":
+        for id, node in enumerate(g.triples):
+            if id == 0:
+                continue
+            elif "op" in node[1]:
+                list_of_t.append([])
+            else:
+                list_of_t[-1].append(node)
+            
 
-    for i, node in enumerate(g.triples):
-        if node[1] in ":instance":  # and check_predicate(node[2]):
-            linked_notes = [node[0]]
-            temp_list = []
-            for j, inner_node in enumerate(g.triples[i:]):
-                if inner_node[0] not in linked_notes:
-                    if inner_node[0] in of_labels and inner_node[2] in linked_notes:
-                        linked_notes.append(inner_node[0])
-                        temp_list.append(inner_node)
-                    else:
-                        break
-                else:
-                    if inner_node[1] not in ":instance":
-                        linked_notes.append(inner_node[2])
-                    temp_list.append(inner_node)
-            list_of_t.append(temp_list)
 
-    # define lambda function
-    split_strings = lambda strings: [string.split() for string in strings]
-
-    list_of_types = open_json_file('data/pred_args_core.json')
-
-    # get all types of arguments in the sentence
-    # temp_args = []
-    # temp_args_arg = []
-    # for i in g.triples:
-    #     if i[1] not in temp_args and i[1] not in [':instance', ':name']:# and "ARG" not in i[1]:
-    #         temp_args.append(i[1])
-    #     if i[1] not in temp_args_arg and i[1] not in [':instance', ':name'] and "ARG" in i[1]:
-    #         temp_args_arg.append(i[1])
-
-    # list_of_t.reverse()
-    result = []
-    list_of_temp = list_of_t.copy()
-    list_of_t = []
-    for graph in list_of_temp:
-        left_set, right_set = set([elem[0] for elem in graph]), set([elem[2] for elem in graph])
+    else:
+        # Split by every predicate
+        check_predicate = lambda string: any([char.isdigit() for char in string.split("-")[-2:]])
+        left_set, right_set = set([elem[0] for elem in g.triples]), set([elem[2] for elem in g.triples])
         of_labels = list(left_set.difference(right_set))
-        if graph[0][0] in of_labels:
-            of_labels.remove(graph[0][0])
+        if g.triples[0][0] in of_labels:
+            of_labels.remove(g.triples[0][0])
 
-        # create possible combination of args
-        if graph[0][2] in list_of_types or True:
-            graph_args = []
-            for i_temp in graph:
-                if i_temp[1] not in graph_args and i_temp[1] not in [':instance']:
-                    graph_args.append(i_temp[1])
-            list_of_frequences = []
-            # list_of_frequences = list_of_types[graph[0][2]]
-            for n in range(len(graph_args) + 1):  # _arg) + 1):
-                if n == 0:
-                    continue
-                else:
-                    list_of_frequences.extend(list(combinations(graph_args, n)))  # _arg, n)))
-            temp_l = []
-            for t_i in list_of_frequences:
-                temp_l.append(list(t_i))
-                # for t_j in temp_args:
-                # temp_l.append(list(t_i) + [t_j])
-
-            list_of_frequences = temp_l  # split_strings(temp_l)
-
-        else:
-            # list_of_t.append(graph)
-            break
-
-        # bring list in format of the level of the graph
-        converted_tree = convert_tree(graph)
-
-        if len(converted_tree) == 1 or not converted_tree[1]:
-            continue
-        else:
-
-            for i, freq in enumerate(list_of_frequences):
-                arg_index = 0
-                right_freq = False
-                temp_g = {}
-                link_g = {}
-                root_nodes = []
-
-                for l, graph_level in enumerate(converted_tree):
-                    for level_element in graph_level:
-                        if len(level_element) == 1 and l != 1:
-                            for key in temp_g:
-                                stop_loop = False
-                                for i_d, sub_tree in enumerate(temp_g[key]):
-                                    if level_element[0][0] in link_g[key][i_d] and not stop_loop:
-                                        sub_tree_links = link_g[key][i_d].copy()
-                                        for index in range(3):
-                                            if (level_element[0][0] == sub_tree[-1][2] or "name" in sub_tree[-2][
-                                                2]) and index == 0:
-                                                temp_g[key][i_d] = sub_tree + level_element
-                                                link_g[key][i_d].append(level_element[0][2])
-                                                break
-                                            else:
-                                                sub_tree.pop(-1)
-                                                if index % 2 == 0:
-                                                    sub_tree_links.pop(-1)
-
-                                                if level_element[0][0] == sub_tree[-1][2]:
-                                                    temp_g[key].append(sub_tree + level_element)
-                                                    link_g[key].append([sub_tree_links, level_element[0][2]])
-                                                    stop_loop = True
-                                                    break
-                            else:
-                                continue
-                        elif not right_freq and l == 0:
-                            if freq[arg_index] == level_element[1][1]:
-                                arg_index += 1
-                                root_nodes.append(level_element)
-                                temp_g[level_element[1][1]] = []
-                                link_g[level_element[1][1]] = []
-                        elif l == 1:
-                            for n in root_nodes:
-                                if n[1][2] == level_element[0][0]:
-                                    if n[1][1] in [":frequency", ":name", ":manner"]:
-                                        if not temp_g[n[1][1]]:
-                                            temp_g[n[1][1]].append(n + level_element)
-                                        else:
-                                            temp_g[n[1][1]] = [temp_g[n[1][1]][0] + level_element]
-                                    else:
-                                        temp_g[n[1][1]].append(n + level_element)
-                                    if len(level_element) == 1:
-                                        link_g[n[1][1]].append([n[1][2]])
-                                    else:
-                                        link_g[n[1][1]].append([n[1][2], level_element[1][2]])
+        for i, node in enumerate(g.triples):
+            if node[1] in ":instance":  # and check_predicate(node[2]):
+                linked_notes = [node[0]]
+                temp_list = []
+                for j, inner_node in enumerate(g.triples[i:]):
+                    if inner_node[0] not in linked_notes:
+                        if inner_node[0] in of_labels and inner_node[2] in linked_notes:
+                            linked_notes.append(inner_node[0])
+                            temp_list.append(inner_node)
                         else:
-                            for key in temp_g:
-                                stop_loop = False
-                                for i_d, sub_tree in enumerate(temp_g[key]):
-                                    if level_element[0][0] in link_g[key][i_d] and not stop_loop:
-                                        sub_tree_temp = sub_tree.copy()
-                                        sub_tree_links = link_g[key][i_d].copy()
-                                        for index in range(3):
-                                            if (level_element[0][0] == sub_tree[-1][2] or "name" in sub_tree[-2][
-                                                2]) and index == 0:
-                                                temp_g[key][i_d] = sub_tree + level_element
-                                                link_g[key][i_d].append(level_element[1][2])
-                                                break
-                                            else:
-                                                sub_tree_temp.pop(-1)
-                                                if index % 2 == 0:
-                                                    sub_tree_links.pop(-1)
-                                                if level_element[0][0] == sub_tree_temp[-1][2]:
-                                                    temp_g[key].append(sub_tree_temp + level_element)
-                                                    link_g[key].append(sub_tree_links + [level_element[1][2]])
-                                                    stop_loop = True
+                            break
+                    else:
+                        if inner_node[1] not in ":instance":
+                            linked_notes.append(inner_node[2])
+                        temp_list.append(inner_node)
+                list_of_t.append(temp_list)
+
+        # define lambda function
+        split_strings = lambda strings: [string.split() for string in strings]
+
+        list_of_types = open_json_file('data/pred_args_core.json')
+
+        # get all types of arguments in the sentence
+        # temp_args = []
+        # temp_args_arg = []
+        # for i in g.triples:
+        #     if i[1] not in temp_args and i[1] not in [':instance', ':name']:# and "ARG" not in i[1]:
+        #         temp_args.append(i[1])
+        #     if i[1] not in temp_args_arg and i[1] not in [':instance', ':name'] and "ARG" in i[1]:
+        #         temp_args_arg.append(i[1])
+
+        # list_of_t.reverse()
+        result = []
+        list_of_temp = list_of_t.copy()
+        list_of_t = []
+        for graph in list_of_temp:
+            left_set, right_set = set([elem[0] for elem in graph]), set([elem[2] for elem in graph])
+            of_labels = list(left_set.difference(right_set))
+            if graph[0][0] in of_labels:
+                of_labels.remove(graph[0][0])
+
+            # create possible combination of args
+            if graph[0][2] in list_of_types or True:
+                graph_args = []
+                for i_temp in graph:
+                    if i_temp[1] not in graph_args and i_temp[1] not in [':instance']:
+                        graph_args.append(i_temp[1])
+                list_of_frequences = []
+                # list_of_frequences = list_of_types[graph[0][2]]
+                for n in range(len(graph_args) + 1):  # _arg) + 1):
+                    if n == 0:
+                        continue
+                    else:
+                        list_of_frequences.extend(list(combinations(graph_args, n)))  # _arg, n)))
+                temp_l = []
+                for t_i in list_of_frequences:
+                    temp_l.append(list(t_i))
+                    # for t_j in temp_args:
+                    # temp_l.append(list(t_i) + [t_j])
+
+                list_of_frequences = temp_l  # split_strings(temp_l)
+
+            else:
+                # list_of_t.append(graph)
+                break
+
+            # bring list in format of the level of the graph
+            converted_tree = convert_tree(graph)
+
+            if len(converted_tree) == 1 or not converted_tree[1]:
+                continue
+            else:
+
+                for i, freq in enumerate(list_of_frequences):
+                    arg_index = 0
+                    right_freq = False
+                    temp_g = {}
+                    link_g = {}
+                    root_nodes = []
+
+                    for l, graph_level in enumerate(converted_tree):
+                        for level_element in graph_level:
+                            if len(level_element) == 1 and l != 1:
+                                for key in temp_g:
+                                    stop_loop = False
+                                    for i_d, sub_tree in enumerate(temp_g[key]):
+                                        if level_element[0][0] in link_g[key][i_d] and not stop_loop:
+                                            sub_tree_links = link_g[key][i_d].copy()
+                                            for index in range(3):
+                                                if (level_element[0][0] == sub_tree[-1][2] or "name" in sub_tree[-2][
+                                                    2]) and index == 0:
+                                                    temp_g[key][i_d] = sub_tree + level_element
+                                                    link_g[key][i_d].append(level_element[0][2])
                                                     break
+                                                else:
+                                                    sub_tree.pop(-1)
+                                                    if index % 2 == 0:
+                                                        sub_tree_links.pop(-1)
+
+                                                    if level_element[0][0] == sub_tree[-1][2]:
+                                                        temp_g[key].append(sub_tree + level_element)
+                                                        link_g[key].append([sub_tree_links, level_element[0][2]])
+                                                        stop_loop = True
+                                                        break
+                                else:
+                                    continue
+                            elif not right_freq and l == 0:
+                                if freq[arg_index] == level_element[1][1]:
+                                    arg_index += 1
+                                    root_nodes.append(level_element)
+                                    temp_g[level_element[1][1]] = []
+                                    link_g[level_element[1][1]] = []
+                            elif l == 1:
+                                for n in root_nodes:
+                                    if n[1][2] == level_element[0][0]:
+                                        if n[1][1] in [":frequency", ":name", ":manner"]:
+                                            if not temp_g[n[1][1]]:
+                                                temp_g[n[1][1]].append(n + level_element)
+                                            else:
+                                                temp_g[n[1][1]] = [temp_g[n[1][1]][0] + level_element]
+                                        else:
+                                            temp_g[n[1][1]].append(n + level_element)
+                                        if len(level_element) == 1:
+                                            link_g[n[1][1]].append([n[1][2]])
+                                        else:
+                                            link_g[n[1][1]].append([n[1][2], level_element[1][2]])
                             else:
-                                continue
-                        if arg_index == len(freq):
-                            right_freq = True
+                                for key in temp_g:
+                                    stop_loop = False
+                                    for i_d, sub_tree in enumerate(temp_g[key]):
+                                        if level_element[0][0] in link_g[key][i_d] and not stop_loop:
+                                            sub_tree_temp = sub_tree.copy()
+                                            sub_tree_links = link_g[key][i_d].copy()
+                                            for index in range(3):
+                                                if (level_element[0][0] == sub_tree[-1][2] or "name" in sub_tree[-2][
+                                                    2]) and index == 0:
+                                                    temp_g[key][i_d] = sub_tree + level_element
+                                                    link_g[key][i_d].append(level_element[1][2])
+                                                    break
+                                                else:
+                                                    sub_tree_temp.pop(-1)
+                                                    if index % 2 == 0:
+                                                        sub_tree_links.pop(-1)
+                                                    if level_element[0][0] == sub_tree_temp[-1][2]:
+                                                        temp_g[key].append(sub_tree_temp + level_element)
+                                                        link_g[key].append(sub_tree_links + [level_element[1][2]])
+                                                        stop_loop = True
+                                                        break
+                                else:
+                                    continue
+                            if arg_index == len(freq):
+                                right_freq = True
 
-                joined_lists = join_lists(
-                    list(temp_g.values()))  # join_lists_pairwise(flatten_lists(list(temp_g.values())))
+                    joined_lists = join_lists(
+                        list(temp_g.values()))  # join_lists_pairwise(flatten_lists(list(temp_g.values())))
 
-                if not joined_lists:
-                    continue
-                else:
-                    if right_freq:
-                        for t_list in joined_lists:
-                            list_of_t.append(remove_duplicates(t_list))
+                    if not joined_lists:
+                        continue
+                    else:
+                        if right_freq:
+                            for t_list in joined_lists:
+                                list_of_t.append(remove_duplicates(t_list))
 
-    # remove and in the tree
-    list_t_copy = list_of_t.copy()
-    for t in list_t_copy:
-        # list_of_t.append(delete_and_node(t))
-        delete_and_node(t)
+        # remove and in the tree
+        list_t_copy = list_of_t.copy()
+        for t in list_t_copy:
+            # list_of_t.append(delete_and_node(t))
+            delete_and_node(t)
 
     # remove duplicates
     # no_duplicats = [item for i, item in enumerate(list_of_t) if item not in list_of_t[:i]]
@@ -1135,8 +1146,6 @@ def sentences_with_verbs(sentences):
     return verb_sentences
 
 
-
-
 def inner_thread(inputs, top_k):
     s, g, g_tag = inputs
     summary_trees = [g]
@@ -1190,7 +1199,7 @@ def run_amr(filename, data_json):
     duplicate_counter = 0
 
     for index_i, key in enumerate(data_json.keys()):
-        if index_i not in [29] and False:  # [17][5, 61, 86, 38]:# and False:
+        if index_i not in [70] and False:  # [17][5, 61, 86, 38]:# and False:
             print(f"Skip example: {key}")
         else:
             se = data_json[key][0]
@@ -1199,11 +1208,13 @@ def run_amr(filename, data_json):
             #    se = se.replace("\u00a0", '')
             se = re.sub(r'\s+', ' ', se)
             if "realsumm" in filename:
-                # initializing tag
-                tag = "t"
-                # regex to extract required strings
-                reg_str = "<" + tag + ">(.*?)</" + tag + ">"
-                sentences = re.findall(reg_str, se)
+                # # initializing tag
+                # tag = "t"
+                # # regex to extract required strings
+                # reg_str = "<" + tag + ">(.*?)</" + tag + ">"
+                # sentences = re.findall(reg_str, se)
+                page_doc = spacy_o(se, disable=["tagger"])
+                sentences = [se.text for se in page_doc.sents]
                 top_k = 5
             elif "pyrxsum" in filename:
                 sentences = [se]
@@ -1247,6 +1258,8 @@ def run_amr(filename, data_json):
             results = []
 
             for idx, (s, g, g_tag) in enumerate(zip(sentences, graphs, graphs_tags)):
+                #if idx == 20:
+                #    results.append(inner_thread((s, g, g_tag), top_k))
                 res = pool.apply_async(inner_thread, args=((s, g, g_tag), top_k))
                 results.append(res)
 
@@ -1399,14 +1412,14 @@ if __name__ == '__main__':
     # run_amr_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-scus.json'),
     #              'eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v10.json')
     #
-    # run_amr_data(open_json_file('eval_interface/src/data/realsumm/realsumm-scus.json'),
-    #              'eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v10.json')
+    run_amr_data(open_json_file('eval_interface/src/data/realsumm/realsumm-scus.json'),
+                 'eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v10.json')
 
     # run_amr_data(open_json_file('eval_interface/src/data/tac08/tac08-scus.json'),
     #              'eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json')
 
-    run_amr_data(open_json_file('eval_interface/src/data/tac09/tac09-scus.json'),
-                 'eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json')
+    # run_amr_data(open_json_file('eval_interface/src/data/tac09/tac09-scus.json'),
+    #              'eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json')
 
     # run_amr_data(open_json_file('eval_interface/src/data/cnndm/cnndm_test-scus.json'),
     #              'eval_interface/src/data/cnndm/cnndm-smus-sg1-test.json')
