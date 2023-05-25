@@ -241,11 +241,11 @@ def evaluate_summaries(scus, stus, smus, output_file, rouge, bert, mover):
 
 # PyrXSum dataset
 def evaluate_pyrxsum(rouge=True, bert=False, mover=False):
-    smus = open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-smus.json')
+    smus = open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v10.json')
     stus = open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-stus.json')
     scus = open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-scus.json')
 
-    evaluate_summaries(scus, stus, smus, 'eval_interface/src/data/pyrxsum/pyrxsum-acc.json', rouge, bert, mover)
+    evaluate_summaries(scus, stus, smus, 'eval_interface/src/data/pyrxsum/pyrxsum-acc-sg4-plus-v10.json', rouge, bert, mover)
     print("PyrXSum done!")
 
 
@@ -303,8 +303,8 @@ def debug():
 
 
 if __name__ == '__main__':
-    # evaluate_pyrxsum(True, True, False)
+    evaluate_pyrxsum(True, True, False)
     # evaluate_realsumm(True, True, False)
-    evaluate_tac08(True, True, False)
-    evaluate_tac09(True, True, False)
+    #evaluate_tac08(True, True, False)
+    #evaluate_tac09(True, True, False)
     # debug()
