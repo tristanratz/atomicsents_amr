@@ -6,7 +6,7 @@ import json
 file_path = 'eval_interface/src/data/stus_rose(Source)/cnndm.target'
 summary_path = 'eval_interface/src/data/stus_rose(Source)/cnndm.target'
 output_file_path = 'eval_interface/src/data/cnndm/cnndm_test_stus.json'
-#file_path = 'eval_interface/src/data/stus_rose(Source)/xsum_stus.txt'  
+#file_path = 'eval_interface/src/data/stus_rose(Source)/xsum_stus.txt'
 #summary_path = 'eval_interface/src/data/stus_rose(Source)/xsum.target'
 #output_file_path = 'eval_interface/src/data/xsum/xsum-stus.json'
 data = []
@@ -19,9 +19,10 @@ with open(summary_path, 'r') as summary_file:
 
 for i, line in enumerate(lines):
     entry = {
-        "instance_id": f"sumsum-{i}",
+        "instance_id": f"cnndm-{i}",
         "summary": summaries[i].strip(),
-        "stus": [text.strip() for text in line.split('\t')]
+        #"stus": [text.strip() for text in line.split('\t')]
+        "stus": [text.strip() for text in line.split('.  ')] # for cnndm
     }
     data.append(entry)
 
