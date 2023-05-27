@@ -22,7 +22,7 @@ for i, line in enumerate(lines):
         "instance_id": f"cnndm-{i}",
         "summary": summaries[i].strip(),
         #"stus": [text.strip() for text in line.split('\t')]
-        "stus": [text.strip() for text in line.split('.  ')] # for cnndm
+        "stus": [text.strip() for text in line.split('  ')] # for cnndm
     }
     data.append(entry)
 
