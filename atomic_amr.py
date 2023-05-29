@@ -566,7 +566,7 @@ def get_subgraphs4_plus(amr_graph):
                 list_of_t.append([])
             else:
                 list_of_t[-1].append(node)
-            
+
 
 
     else:
