@@ -5,13 +5,16 @@ import torch
 from Lite2_3Pyramid.reproduce.utils import system_level_correlation
 from Lite2_3Pyramid.reproduce.utils import summary_level_correlation
 from Lite2_3Pyramid.metric.score import score
-import matplotlib.pyplot as plt
-import multiprocessing
 
 
-def open_json_file(filename):
+experiment = "_gpt-3.5-turbo_ctx_twoshot"
+sxu = "sgu"
+
+def open_json_file(filename, sxu_name=None):
     with open(filename) as f:
         data_json = json.load(f)
+        if sxu_name == "sgu":
+            return data_json["data"]
         return data_json
 
 
@@ -78,7 +81,7 @@ def nli_evaluation_from_paper(summarys, smus):
             if i == 0:
                 name_of_system.append(value[0])
             all_summarys[j - 1].append(value[1])
-        all_sxus.append(sorted_smus[i]['smus'])
+        all_sxus.append(sorted_smus[i][sxu + 's'])
     results = []
     for i in range(len(all_summarys)):
         print(f"System summary: {name_of_system[i]} ( {i + 1} / {len(all_summarys)} )")
@@ -122,12 +125,12 @@ def corr_evaluate_realsumm(load_data=False):
     print("REALSumm start!")
 
     if load_data:
-        result_Dict = open_json_file('eval_interface/src/data/realsumm/realsumm-nli-score-smu.json')
+        result_Dict = open_json_file('eval_interface/src/data/realsumm/realsumm-nli-score-smu' + experiment + '.json')
     else:
         result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/realsumm/realsumm-system-summary.json'),
-                                        open_json_file('eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v10.json'))
+                                        open_json_file('eval_interface/src/data/realsumm/realsumm' + experiment + '.json', sxu))
 
-        save_dict_to_json(result_Dict, 'eval_interface/src/data/realsumm/realsumm-nli-score-smu.json')
+        save_dict_to_json(result_Dict, 'eval_interface/src/data/realsumm/realsumm-nli-score-smu' + experiment + '.json')
 
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
@@ -141,12 +144,12 @@ def corr_evaluate_realsumm(load_data=False):
 def corr_evaluate_pyrxsum(load_data=False):
     print("PyrXSum start!")
     if load_data:
-        result_Dict = open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu.json')
+        result_Dict = open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu' + experiment + '.json')
     else:
         result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-system-summary.json'),
-                                        open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v10.json'))
+                                        open_json_file('eval_interface/src/data/pyrxsum/pyrxsum' + experiment + '.json', sxu))
 
-        save_dict_to_json(result_Dict, 'eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu.json')
+        save_dict_to_json(result_Dict, 'eval_interface/src/data/pyrxsum/pyrxsum-nli-score-smu' + experiment + '.json')
 
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
@@ -160,12 +163,12 @@ def corr_evaluate_tac08(load_data=False):
     print("tac08 start!")
 
     if load_data:
-        result_Dict = open_json_file('eval_interface/src/data/tac08/tac08-nli-score-smu.json')
+        result_Dict = open_json_file('eval_interface/src/data/tac08/tac08-nli-score-smu' + experiment + '.json')
     else:
         result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/tac08/tac08-system-summary.json'),
-                                        open_json_file('eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json'))
+                                        open_json_file('eval_interface/src/data/tac08/tac08' + experiment + '.json', sxu))
 
-        save_dict_to_json(result_Dict, 'eval_interface/src/data/tac08/tac08-nli-score-smu.json')
+        save_dict_to_json(result_Dict, 'eval_interface/src/data/tac08/tac08-nli-score-smu' + experiment + '.json')
 
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
@@ -175,12 +178,12 @@ def corr_evaluate_tac09(load_data=False):
     print("tac09 start!")
 
     if load_data:
-        result_Dict = open_json_file('eval_interface/src/data/tac09/tac09-nli-score-smu.json')
+        result_Dict = open_json_file('eval_interface/src/data/tac09/tac09-nli-score-smu' + experiment + '.json')
     else:
         result_Dict = nli_evaluate_data(open_json_file('eval_interface/src/data/tac09/tac09-system-summary.json'),
-                                        open_json_file('eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json'))
+                                        open_json_file('eval_interface/src/data/tac09/tac09' + experiment + '.json', sxu))
 
-        save_dict_to_json(result_Dict, 'eval_interface/src/data/tac09/tac09-nli-score-smu.json')
+        save_dict_to_json(result_Dict, 'eval_interface/src/data/tac09/tac09-nli-score-smu' + experiment + '.json')
 
     return calc_corr_summary_and_system(result_Dict,
                                         open_json_file(
@@ -200,7 +203,7 @@ def corr_evaluation_datase():
     list_of_results.append(corr_evaluate_tac08())
     list_of_results.append(corr_evaluate_tac09())
 
-    write_to_json(list_of_results, 'data/extrinsic_evaluation-smu-sg4-plus-v10.json')#result_list, 'data/extrinsic_evaluation-smu-sg4-plus-v10.json')
+    write_to_json(list_of_results, 'data/extrinsic_evaluation' + experiment + '.json')#result_list, 'data/extrinsic_evaluation-smu-sg4-plus-v10.json')
 
 
 def plot_results():
