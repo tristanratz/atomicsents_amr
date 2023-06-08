@@ -22,7 +22,7 @@ def generate(ds, sample_file=None, nr_samples=1, instruction=False, save_name=No
     with open(fn) as f:
         dataset = []
         d = json.load(f)
-        for idx, s in enumerate(d[0:2]):
+        for idx, s in enumerate(d):
             print(idx, "/", len(d), "samples")
             sample = { "summary": s["summary"], "instance_id": s["instance_id"] }
             prompt = ""
@@ -31,14 +31,27 @@ def generate(ds, sample_file=None, nr_samples=1, instruction=False, save_name=No
                 with open(get_samplefile_path(sample_file), 'r') as sf:
                     for sam in sf:
                         samples.append(json.loads(sam))
-                prompt += "Example: " + samples[0]["prompt"] + samples[0]["completion"] + "\n"
             if instruction:
                 prompt += "split this text into small sentences: "
             prompt += s["summary"].replace('<t> ','').replace(' </t>','').replace(" . ", ". ")
-            res = openai.Completion.create(model=ft_model, prompt=prompt + ' ->', max_tokens=1000, stop=" END\n")
-            sample['sgus'] = res['choices'][0]['text'].replace(" END\n", "").lstrip().replace(" . ", ". ").split(" # ")
+            messages=[
+                {"role": "system", "content": "You split the provided input in small sentences separated by an #. The split sentences represent subsentences of the original sentence."},
+            ]
+
+            for samp in samples[0:nr_samples]:
+                messages.append({"role": "user", "content": samp["prompt"]})
+                messages.append({"role": "assistant", "content": samp["completion"]})
+            messages.append(
+                {"role": "user", "content": prompt}
+            )
+            res = openai.ChatCompletion.create(
+                model=ft_model, 
+                temperature=0,
+                messages=messages
+            )
+            sample['sgus'] = res['choices'][0]['message']["content"].replace(" END\n", "").lstrip().replace(" . ", ". ").split(" # ")
             dataset.append(sample)
         json.dump(dataset, open(get_save_path(ds, save_name), "w"))
 
-for dataset in ["pyrxsum", "realsumm"]:
-    generate(dataset, sample_file="gpt_training_full", nr_samples=1, instruction=False, save_name=dataset + "_oneshot_no_instr")
+for dataset in ["realsumm", "pyrxsum"]:
+    generate(dataset, sample_file="gpt_training_chat_full", nr_samples=1, instruction=False, save_name=dataset + "gpt4_ctx_oneshot")
