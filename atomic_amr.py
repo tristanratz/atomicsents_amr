@@ -21,6 +21,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, pairwise_distances_argmin_min
 import numpy as np
 import coreferee
+import math
 
 from Lite2_3Pyramid.metric.extract_stus import _get_and_replace_coref
 
@@ -406,9 +407,28 @@ def get_subgraphs3(amr_graph):
     for i in list_of_t:
         if len(i) > 3:
             tree_list.append(i)
-    list_of_t = list(map(lambda x: penman.format(penman.configure(Graph(x))), tree_list))
 
-    return list_of_t
+        # --------------------------------------- Temp
+        # check if graph is right
+        list_of_t = []
+        valide = True
+        for counter, tree in enumerate(tree_list):
+            linked_nodes_check = []
+            valide = True
+            for i, node in enumerate(tree):
+                if i == 0:
+                    linked_nodes_check.append(node[0])
+                elif node[0] in linked_nodes_check:
+                    linked_nodes_check.append(node[2])
+                else:
+                    # print(counter)
+                    valide = False
+            if valide:
+                list_of_t.append(tree)
+        # ------------------------------------------------ Temp
+    list_of_t_result = list(map(lambda x: penman.format(penman.configure(Graph(x))), list_of_t))
+
+    return list_of_t_result
 
 
 def get_subgraphs4(amr_graph):
@@ -1159,7 +1179,7 @@ def inner_thread(inputs, top_k):
     # print("  ")
     dict_tag = get_concepts(g_tag)
     temp_sent_list = []
-    for sgf in [get_subgraphs4_plus]:  # , get_subgraphs, get_subgraphs2, get_subgraphs3, get_subgraphs4]:
+    for sgf in [get_subgraphs3]: #4_plus]:  # , get_subgraphs, get_subgraphs2, get_subgraphs3, get_subgraphs4]:
         subgraphs = sgf(g)
         # Fallback okay ? --> Original sentence for default if too short?
         # if 0 == len(subgraphs):
@@ -1182,16 +1202,17 @@ def inner_thread(inputs, top_k):
 
     # Filter sentences
     # take top k sentences from nli
-    nli_rank = sent_in_summary(s, temp_sent_list, True)
-    nli_rank_sorted = nli_rank.copy()
-    nli_rank_sorted.sort(reverse=True)
-    nli_rank_sorted = nli_rank_sorted[:top_k]
-
-    for i, sentence in enumerate(temp_sent_list):
-        if nli_rank[i] in nli_rank_sorted and sentence not in result_sents:
-            result_sents.append(sentence)
-            result_trees.append(list_of_trees[i])
-    return summary_trees, result_sents, result_trees
+    # nli_rank = sent_in_summary(s, temp_sent_list, True)
+    # nli_rank_sorted = nli_rank.copy()
+    # nli_rank_sorted.sort(reverse=True)
+    # top_k = math.ceil(0.1 * len(nli_rank_sorted))
+    # nli_rank_sorted = nli_rank_sorted[:top_k]#[x for x in nli_rank_sorted if x > 0.9][:top_k]
+    #
+    # for i, sentence in enumerate(temp_sent_list):
+    #     if nli_rank[i] in nli_rank_sorted and sentence not in result_sents:
+    #         result_sents.append(sentence)
+    #         result_trees.append(list_of_trees[i])
+    return summary_trees, temp_sent_list, list_of_trees #summary_trees, result_sents, result_trees
 
 
 def run_amr(filename, data_json):
@@ -1404,22 +1425,22 @@ def run_realsumm_amr(scu_path, result_path):
 def run_amr_data(scus, result_path):
     index = [value['instance_id'] for value in scus]
     summaries = [value['summary'] for value in scus]
-    golden_summaries = _get_and_replace_coref(summaries, index, torch.device("cuda"))
+    golden_summaries = _get_and_replace_coref(summaries, index, torch.device("mps"))
     run_amr(result_path, golden_summaries)
 
 
 if __name__ == '__main__':
-    # run_amr_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-scus.json'),
-    #              'eval_interface/src/data/pyrxsum/pyrxsum-smus-sg4-plus-v10.json')
-    #
+    run_amr_data(open_json_file('eval_interface/src/data/pyrxsum/pyrxsum-scus.json'),
+                 'eval_interface/src/data/pyrxsum/pyrxsum-smus-sg3.json')
+
     run_amr_data(open_json_file('eval_interface/src/data/realsumm/realsumm-scus.json'),
-                 'eval_interface/src/data/realsumm/realsumm-smus-sg4-plus-v10.json')
+                 'eval_interface/src/data/realsumm/realsumm-smus-sg3.json')
 
-    # run_amr_data(open_json_file('eval_interface/src/data/tac08/tac08-scus.json'),
-    #              'eval_interface/src/data/tac08/tac2008-smus-sg4-plus-v10.json')
+    run_amr_data(open_json_file('eval_interface/src/data/tac08/tac08-scus.json'),
+                 'eval_interface/src/data/tac08/tac2008-smus-sg3.json')
 
-    # run_amr_data(open_json_file('eval_interface/src/data/tac09/tac09-scus.json'),
-    #              'eval_interface/src/data/tac09/tac2009-smus-sg4-plus-v10.json')
+    run_amr_data(open_json_file('eval_interface/src/data/tac09/tac09-scus.json'),
+                 'eval_interface/src/data/tac09/tac2009-smus-sg3.json')
 
     # run_amr_data(open_json_file('eval_interface/src/data/cnndm/cnndm_test-scus.json'),
     #              'eval_interface/src/data/cnndm/cnndm-smus-sg1-test.json')

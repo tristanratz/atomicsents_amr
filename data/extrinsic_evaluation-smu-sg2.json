@@ -12,5 +12,19 @@
     "spearman_system": 0.8961538461538462,
     "pearson_summary": 0.4400724171269772,
     "spearman_summary": 0.42253124770687583
+  },
+  {
+    "instance_id": "tac08",
+    "pearson_system": 0.8638922203492131,
+    "spearman_system": 0.8219569965240396,
+    "pearson_summary": 0.44943487013876043,
+    "spearman_summary": 0.48124958069564266
+  },
+  {
+    "instance_id": "tac09",
+    "pearson_system": 0.9406249070087663,
+    "spearman_system": 0.8798499252860855,
+    "pearson_summary": 0.5641363941830833,
+    "spearman_summary": 0.5217515776953956
   }
 ]
