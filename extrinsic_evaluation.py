@@ -7,8 +7,8 @@ from Lite2_3Pyramid.reproduce.utils import summary_level_correlation
 from Lite2_3Pyramid.metric.score import score
 
 
-experiment = "_gpt-3.5-turbo_ctx_twoshot"
-sxu = "sgu"
+experiment = "sg4"
+sxu = "smu"
 
 def open_json_file(filename, sxu_name=None):
     with open(filename) as f:
