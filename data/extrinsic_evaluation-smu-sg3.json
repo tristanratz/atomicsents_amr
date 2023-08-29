@@ -1,9 +1,0 @@
-[
-  {
-    "instance_id": "pyrxsum",
-    "pearson_system": 0.9209246328464571,
-    "spearman_system": 0.8642424242424243,
-    "pearson_summary": 0.5345162336874544,
-    "spearman_summary": 0.5238625685841809
-  }
-]
