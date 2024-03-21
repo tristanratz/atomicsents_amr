@@ -45,7 +45,7 @@ const Settings = (props: SettingsProps) => {
     const subgraphs: string[] = Object.values(Subgraph);
     return (
         <div className='Settings'>
-            <FormControl sx={{m: 1, minWidth: 120}} size="small" style={{margin: "0.5rem 2rem 0.5rem 0rem"}}>
+            <FormControl sx={{ minWidth: 150}} size="small" style={{margin: "0.5rem 2rem 0.5rem 0rem"}}>
                 <InputLabel id="dataset-dropdown">Dataset</InputLabel>
                 <Select
                     labelId="dataset-dropdown-label"
@@ -60,13 +60,13 @@ const Settings = (props: SettingsProps) => {
 
                 </Select>
             </FormControl>
-            <FormControl sx={{m: 1, minWidth: 120}} size="small" style={{margin: "0.5rem 2rem 0.5rem 0rem"}}>
+            <FormControl sx={{minWidth: 150}} size="small" style={{margin: "0.5rem 2rem 0.5rem 0rem"}}>
                 <InputLabel id="metric-dropdown">Evaluation Metric</InputLabel>
                 <Select
                     labelId="metric-dropdown-label"
                     id="metric-dropdown"
                     value={chosenMetric}
-                    label="Metric"
+                    label="Evaluation Metric"
                     onChange={handleChangeMetric}
                 >
                     {metrics.map((val) =>
@@ -75,13 +75,13 @@ const Settings = (props: SettingsProps) => {
 
                 </Select>
             </FormControl>
-            <FormControl sx={{m: 1, minWidth: 120}} size="small" style={{margin: "0.5rem 2rem 0.5rem 0rem"}}>
+            <FormControl sx={{minWidth: 150}} size="small" style={{margin: "0.5rem 2rem 0.5rem 0rem"}}>
                 <InputLabel id="subgraph-dropdown">Subgraph Method</InputLabel>
                 <Select
                     labelId="subgraph-dropdown-label"
                     id="subgraph-dropdown"
                     value={chosenSubgraph}
-                    label="Subgraph"
+                    label="Subgraph Method"
                     onChange={handleChangeSubgraph}
                 >
                     {subgraphs.map((val) =>
