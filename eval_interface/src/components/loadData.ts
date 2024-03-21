@@ -6,21 +6,21 @@ import stusRealsumm from "../data/realsumm/realsumm-stus.json";
 
 import smusSGPyrXsum from "../data/pyrxsum/pyrxsum-smus.json";
 import smusSG2PyrXsum from "../data/pyrxsum/pyrxsum-smus-sg2.json";
-import smusSG3PyrXsum from "../data/pyrxsum/pyrxsum-smus-sg3-v2.json";
-import smusSG4PyrXsum from "../data/pyrxsum/pyrxsum-smus-sg4-plus-v9.json";
+import smusSG3PyrXsum from "../data/pyrxsum/pyrxsum-smus-sg3-v4.json";
+import smusSG4PyrXsum from "../data/pyrxsum/pyrxsum-smus-sg4.json";
 import smusSGRealsumm from "../data/realsumm/realsumm-smus.json";
 import smusSG2Realsumm from "../data/realsumm/realsumm-smus-sg2.json";
-import smusSG3Realsumm from "../data/realsumm/realsumm-smus-sg3-v2.json";
-import smusSG4Realsumm from "../data/realsumm/realsumm-smus-sg4-plus-v9.json";
+import smusSG3Realsumm from "../data/realsumm/realsumm-smus-sg3-v4.json";
+import smusSG4Realsumm from "../data/realsumm/realsumm-smus-sg4.json";
 
 import accSGPyrXsum from "../data/pyrxsum/pyrxsum-acc.json";
 import accSG2PyrXsum from "../data/pyrxsum/pyrxsum-acc-sg2.json";
-import accSG3PyrXsum from "../data/pyrxsum/pyrxsum-acc-sg3-v2.json";
-import accSG4PyrXsum from "../data/pyrxsum/pyrxsum-acc-sg4-plus-v9.json";
+import accSG3PyrXsum from "../data/pyrxsum/pyrxsum-acc-sg3-v3.json";
+import accSG4PyrXsum from "../data/pyrxsum/pyrxsum-acc-sg4.json";
 import accSGRealsumm from "../data/realsumm/realsumm-acc.json";
 import accSG2Realsumm from "../data/realsumm/realsumm-acc-sg2.json";
-import accSG3Realsumm from "../data/realsumm/realsumm-acc-sg3-v2.json";
-import accSG4Realsumm from "../data/realsumm/realsumm-acc-sg4-plus-v9.json";
+import accSG3Realsumm from "../data/realsumm/realsumm-acc-sg3-v4.json";
+import accSG4Realsumm from "../data/realsumm/realsumm-acc-sg4.json";
 
 interface SCUSData {
     [key: string]: {
