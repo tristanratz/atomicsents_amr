@@ -44,18 +44,7 @@ def calc_corr_summary_and_system(results, golden, cross_validation=False):
     else:
         system_pearson, system_spearman = system_level_correlation(golden, results)
 
-    summary_pearson, summary_spearman, pearson, spearman = summary_level_correlation(golden, results)
-
-    print(f"Pearson mean: {np.mean(pearson)}")
-    print(f"Pearson median: {np.median(pearson)}")
-    print(f"Pearson outliers: {[index for index, item in enumerate(pearson) if item < -0.3]}")
-    #plt.boxplot(pearson)
-    #plt.show()
-    print(f"Spearman mean: {np.mean(spearman)}")
-    print(f"Spearman median: {np.median(spearman)}")
-    print(f"Spearman outliers: {[index for index, item in enumerate(spearman) if item < -0.3]}")
-    #plt.boxplot(spearman)
-    #plt.show()
+    summary_pearson, summary_spearman = summary_level_correlation(golden, results)
 
     return [system_pearson, system_spearman, summary_pearson, summary_spearman]
 
@@ -75,21 +64,17 @@ def nli_evaluation_from_paper(summarys, smus, model_type):
     for i, data in enumerate(all_sorted_summaries):
         for j, value in enumerate(data.items()):
             if "instance_id" in value[0]:
-                # output_Temp = {'instance_id': value}
-                # print(value)
                 continue
             if i == 0:
                 name_of_system.append(value[0])
             all_summarys[j - 1].append(value[1])
         all_sxus.append(sorted_smus[i][sxu + 's'])
-    results = []
+
     for i in range(len(all_summarys)):
         print(f"System summary: {name_of_system[i]} ( {i + 1} / {len(all_summarys)} )")
-        # outputTemp = {'instance_id': name_of_system[i]}
+
         scores = score(all_summarys[i], all_sxus, detail=True, device=torch.device("mps"), model_type=model_type)['l3c']
-        # outputTemp['mean'] = scores[0]
-        # outputTemp['all'] = scores[1]
-        # print(score(all_summarys[0], all_sxus, detail=True)['l3c'])
+
         outputDict[name_of_system[i].replace('.summary', '')] = dict(
             zip([str(n) for n in range(len(scores[1]))], map(lambda x: x, scores[1])))
 

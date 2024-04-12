@@ -1441,12 +1441,3 @@ if __name__ == '__main__':
 
     run_amr_data(open_json_file('eval_interface/src/data/tac09/tac09-scus.json'),
                  'eval_interface/src/data/tac09/tac2009-smus-sg3.json')
-
-    # run_amr_data(open_json_file('eval_interface/src/data/cnndm/cnndm_test-scus.json'),
-    #              'eval_interface/src/data/cnndm/cnndm-smus-sg1-test.json')
-
-    # run_amr_data(open_json_file('eval_interface/src/data/xsum/xsum-scus.json'),
-    #              'eval_interface/src/data/xsum/xsum-smus-sg4.json')
-
-    # run_amr_data(open_json_file('eval_interface/src/data/samsum/samsum-scus.json'),
-    #              'eval_interface/src/data/samsum/samsum-smus-sg4.json')
