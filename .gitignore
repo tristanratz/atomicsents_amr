@@ -11,3 +11,4 @@ amr-utils
 Yale-LILY-SummEval-*
 api_key.txt
 old
+.env

@@ -7,8 +7,8 @@ from Lite2_3Pyramid.reproduce.utils import summary_level_correlation
 from Lite2_3Pyramid.metric.score import score
 
 
-experiment = "-smus-sg4-plus-v11-10"
-sxu = "smu"
+experiment = "-stus"
+sxu = "stu"
 
 def open_json_file(filename, sxu_name=None):
     with open(filename) as f:
@@ -98,7 +98,7 @@ def nli_evaluation_from_paper(summarys, smus, model_type):
 
 def write_to_json(list_of_results, output_file):
     outputDict = []
-    list_of_datasets = ['pyrxsum', 'realsumm', 'tac08', 'tac09']
+    list_of_datasets = ['pyrxsum', 'realsumm', 'tac09'] # 'tac08',
     for i, result in enumerate(list_of_results):
         output_Temp = {'instance_id': list_of_datasets[i],
                        'pearson_system': result[0],
@@ -200,7 +200,7 @@ def corr_evaluation_datase():
 
     list_of_results.append(corr_evaluate_pyrxsum())
     list_of_results.append(corr_evaluate_realsumm())
-    list_of_results.append(corr_evaluate_tac08())
+    # list_of_results.append(corr_evaluate_tac08())
     list_of_results.append(corr_evaluate_tac09())
 
     write_to_json(list_of_results, 'data/extrinsic_evaluation' + experiment + '.json')#result_list, 'data/extrinsic_evaluation-smu-sg4-plus-v10.json')

@@ -5,6 +5,8 @@ import numpy as np
 from numpy.linalg import norm
 
 
+FULL = True
+
 def open_jsonl_file(filename):
     with open(filename) as f:
         data_json = [json.loads(jline) for jline in f.read().splitlines()]
@@ -50,26 +52,32 @@ def create_scu_json_file(output_file_name, json_data):
             # Solution: Take most likely contributor, look to which summary it belongs and add it to this summary
             for contr in scu["contributors"]:
                 clabel = contr["label"]
-                cvec = tf.transform([clabel])
+                
+                # Full will assign the SCU to every Summary that contributed
+                if FULL:
+                    list_of_scus[contr['summary_index']].append(label)
+                else:
+                    cvec = tf.transform([clabel])
 
-                # Calc the similarity between the general label and the contributor
-                cosine = cosine_similarity(lvec, cvec, dense_output=True) 
+                    # Calc the similarity between the general label and the contributor
+                    cosine = cosine_similarity(lvec, cvec, dense_output=True) 
 
-                # Choose the summary which is most contributes most
-                if maxSim < cosine and cosine != 0:
-                    maxSim = cosine
-                    maxInd = contr["summary_index"]
-                    maxLab = contr["label"]
+                    # Choose the summary which is most contributes most
+                    if maxSim < cosine and cosine != 0:
+                        maxSim = cosine
+                        maxInd = contr["summary_index"]
+                        maxLab = contr["label"]
 
-            avg_sim = avg_sim + maxSim
+            if not FULL:
+                avg_sim = avg_sim + maxSim
 
-            if max_sim < maxSim:
-                max_sim = maxSim
-            if low_sim > maxSim:
-                low_sim = maxSim
-                print(label, maxSim, maxLab)
+                if max_sim < maxSim:
+                    max_sim = maxSim
+                if low_sim > maxSim:
+                    low_sim = maxSim
+                    print(label, maxSim, maxLab)
 
-            list_of_scus[maxInd].append(label)
+                list_of_scus[maxInd].append(label)
 
         for ind, summary in enumerate(summaries):
             outputDict.append({
@@ -90,8 +98,8 @@ def create_scu_json_file(output_file_name, json_data):
 
 # Tac2008 dataset
 data_json = open_jsonl_file("../../eval_interface/src/data/tac08/tac2008.pyramids.raw.jsonl")
-create_scu_json_file("../../eval_interface/src/data/tac08/tac2008-scus-sp.json", data_json)
+create_scu_json_file("../../eval_interface/src/data/tac08/tac2008-scus-sp-full.json", data_json)
 
 # Tac2009 dataset
 data_json = open_jsonl_file("../../eval_interface/src/data/tac09/tac2009.pyramids.raw.jsonl")
-create_scu_json_file("../../eval_interface/src/data/tac09/tac2009-scus-sp.json", data_json)
+create_scu_json_file("../../eval_interface/src/data/tac09/tac2009-scus-sp-full.json", data_json)
