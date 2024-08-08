@@ -30,8 +30,15 @@ Run intrinsic evaluation:
 python intrinsic_evaluation.py
 ```
 
-Start Interface (TODO):
+Install dependencies for Interface:
 ```
+(cd eval_interface)
+yarn install
+```
+
+Start Interface:
+```
+(cd eval_interface)
 yarn start
 ```
 
